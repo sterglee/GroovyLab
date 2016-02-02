@@ -1,0 +1,61 @@
+
+
+@groovy.transform.CompileStatic
+public void testDD(double[][] v)  {  
+        
+        int nrows = v.length; 
+        int ncols = v[0].length; 
+        
+    for (int j = 0; j < nrows; j++) {
+      for (int k = 0; k < ncols; k++) {
+        v[j][k] = v[j][k]+v[k][j];
+      }
+  }
+ }
+
+@groovy.transform.CompileStatic
+public void testMat(Matrix v) {  
+        
+        int nrows = v.numRows();  
+        int ncols = v.numCols();  
+        
+    for (int j = 0; j < nrows; j++) {
+      for (int k = 0; k < ncols; k++) {
+        v[j][k] = v[j][k]+v[k][j];
+      }
+  }
+ }
+
+@groovy.transform.CompileStatic
+public void testDirectMat(Matrix v) {  
+        
+        int nrows = v.numRows();  
+        int ncols = v.numCols();  
+        
+    for (int j = 0; j < nrows; j++) {
+      for (int k = 0; k < ncols; k++) {
+        v.d[j][k] = v.d[j][k]+v.d[k][j];
+      }
+  }
+ }
+      
+    N = 3000
+    x = Ones(N, N)
+    y = ones(N, N)
+
+    tic()
+    testDD(x)
+    tmDD = toc()
+    
+
+    tic()
+    testMat(y)
+    tmMat = toc()
+
+
+
+    tic()
+    testDirectMat(y)
+    tmDirectMat = toc()
+
+    println("time Java index access ="+tmDD+ ", tmGroovy = "+tmMat+", Groovy Direct Mat = "+tmDirectMat)

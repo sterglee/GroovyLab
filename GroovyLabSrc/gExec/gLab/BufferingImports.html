@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1253">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 2.2  (Win32)">
+	<META NAME="CREATED" CONTENT="0;0">
+	<META NAME="CHANGED" CONTENT="20130720;12205656">
+	<STYLE TYPE="text/css">
+	<!--
+		@page { size: 21cm 29.7cm; margin: 2.01cm }
+		P { margin-bottom: 0.2cm }
+		TD P { margin-bottom: 0.2cm }
+		PRE { font-family: "Times New Roman" }
+		TT.western { font-family: "Liberation Mono", monospace }
+		TT.cjk { font-family: "Andale Mono", monospace }
+		TT.ctl { font-family: "Andale Mono", monospace }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="el-GR" DIR="LTR">
+<H1>The import buffering mechanism</H1>
+<PRE STYLE="line-height: 150%"></PRE><P ALIGN=JUSTIFY STYLE="font-weight: medium; line-height: 150%">
+<BR><BR>
+</P>
+<PRE STYLE="line-height: 150%; text-align: justify"><TT CLASS="western"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><SPAN STYLE="font-style: normal">The GroovyShell lacks a feature of keeping the imports from the previous statements. This can be a rather inconvenient in many cases, since we must issue manually the same import statements, before executing commands depending on them. For that reason, we implemented in GroovyLab a simple import buffering, that we think can facilitate the user's work. </SPAN></FONT></FONT></TT>
+<TT CLASS="western"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><SPAN STYLE="font-style: normal">GroovyLab prepends at the user's scripts some basic imports that extend the functionality, by performing a lot of import and import static statements, and allowing for example to use commands as </SPAN></FONT></FONT></TT><TT CLASS="western"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>figure()</I></FONT></FONT></TT><TT CLASS="western"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><SPAN STYLE="font-style: normal">, </SPAN></FONT></FONT></TT><TT CLASS="western"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>plot()</I></FONT></FONT></TT><TT CLASS="western"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><SPAN STYLE="font-style: normal"> etc. In order to allow specialized import statements to be kept during a user's session, the user can </SPAN></FONT></FONT></TT><STRONG><FONT FACE="Times New Roman, serif"><FONT SIZE=3><SPAN STYLE="font-style: normal">buffer</SPAN></FONT></FONT></STRONG><TT CLASS="western"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><SPAN STYLE="font-style: normal"> these import statements for that particular working session only. That can be accomplished by </SPAN></FONT></FONT></TT><STRONG><FONT FACE="Times New Roman, serif"><FONT SIZE=3><SPAN STYLE="font-style: normal">selecting the relevant import statements</SPAN></FONT></FONT></STRONG><TT CLASS="western"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><SPAN STYLE="font-style: normal"> and then using </SPAN></FONT></FONT></TT><STRONG><FONT FACE="Times New Roman, serif"><FONT SIZE=3><SPAN STYLE="font-style: normal">Buffer selected Imports</SPAN></FONT></FONT></STRONG><TT CLASS="western"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><SPAN STYLE="font-style: normal"> option from the </SPAN></FONT></FONT></TT><STRONG><FONT FACE="Times New Roman, serif"><FONT SIZE=3><SPAN STYLE="font-style: normal">Imports</SPAN></FONT></FONT></STRONG><TT CLASS="western"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><SPAN STYLE="font-style: normal"> menu. </SPAN></FONT></FONT></TT>
+<TT CLASS="western"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>As an example suppose that we have the following script</FONT></FONT></TT><FONT FACE="Times New Roman, serif"><FONT SIZE=3> </FONT></FONT>
+<FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>// SECTION 1: &nbsp;import section</I></FONT></FONT>
+<FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>import static com.nr.test.NRTestUtil.maxel</I></FONT></FONT>
+<FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>import static com.nr.test.NRTestUtil.vecsub</I></FONT></FONT>
+<FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>import static java.lang.Math.cos</I></FONT></FONT>
+<FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>import com.nr.interp.RBF_gauss</I></FONT></FONT>
+<FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>import com.nr.interp.RBF_interp</I></FONT></FONT>
+<FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>import com.nr.interp.RBF_inversemultiquadric</I></FONT></FONT>
+<FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>import com.nr.interp.RBF_multiquadric</I></FONT></FONT>
+<FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>import com.nr.interp.RBF_thinplate</I></FONT></FONT>
+<FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>import com.nr.ran.Ran</I></FONT></FONT>
+<A NAME="__DdeLink__5056_2071084271"></A><A NAME="__DdeLink__6092_443707396"></A><FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>// SECTION 2: import independent commands section</I></FONT></FONT>
+   <FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>NPTS=100; NDIM=2; N=10; M=10;</I></FONT></FONT>
+   <FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>sbeps=0.05</I></FONT></FONT>
+   <FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>pts =new double[NPTS][NDIM]</I></FONT></FONT>
+   <FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>y = new double[NPTS]</I></FONT></FONT>
+   <FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>actual = new double[M]</I></FONT></FONT>
+   <FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>estim = new double[M]</I></FONT></FONT>
+   <FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>ppt = new double[2]</I></FONT></FONT>
+   <FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>globalflag=false</I></FONT></FONT>
+  
+  <FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>// SECTION 3: &nbsp;import dependent command section</I></FONT></FONT>
+  <FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>// Test RBF_interp</I></FONT></FONT>
+   <FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>myran = new Ran(17)</I></FONT></FONT>
+   <FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>pt = new double[M][2]</I></FONT></FONT>
+   <FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>for (i=0;i&lt;M;i++) {</I></FONT></FONT>
+    <FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>pt[i][0]=(double)(N)*myran.doub()</I></FONT></FONT>
+    <FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>pt[i][1]=(double)(N)*myran.doub()</I></FONT></FONT>
+    <FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>actual[i]=cos(pt[i][0]/20.0)*cos(pt[i][1]/20.0)</I></FONT></FONT>
+  <FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>}</I></FONT></FONT>
+   <FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>for (i=0;i&lt;N;i++) {</I></FONT></FONT>
+    <FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>for (j=0;j&lt;N;j++) {</I></FONT></FONT>
+     <FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>k=N*i+j</I></FONT></FONT>
+     <FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>pts[k][0]=(double)(j)</I></FONT></FONT>
+     <FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>pts[k][1]=(double)(i)</I></FONT></FONT>
+     <FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>y[k]=cos(pts[k][0]/20.0)*cos(pts[k][1]/20.0)</I></FONT></FONT>
+   <FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>}</I></FONT></FONT>
+  <FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>}</I></FONT></FONT>
+   <FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>println(&quot;Testing RBF_interp with multiquadric function&quot;)</I></FONT></FONT>
+   <FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>scale=3.0</I></FONT></FONT>
+   <FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>multiquadric = new RBF_multiquadric(scale)</I></FONT></FONT>
+   <FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>myRBFmqf = new RBF_interp(pts,y,multiquadric,false)</I></FONT></FONT>
+  
+   <FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>for (i=0;i&lt;M;i++) {</I></FONT></FONT>
+    <FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>ppt[0]=pt[i][0]</I></FONT></FONT>
+    <FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>ppt[1]=pt[i][1]</I></FONT></FONT>
+    <FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>estim[i]=myRBFmqf.interp(ppt)</I></FONT></FONT>
+ <FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>}</I></FONT></FONT></PRE><P ALIGN=JUSTIFY STYLE="line-height: 150%">
+<A NAME="__DdeLink__6098_443707396"></A><TT CLASS="western"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>In
+order to execute first the import independent commands (i.e. SECTION
+</FONT></FONT></TT><TT CLASS="western"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>2</FONT></FONT></TT><TT CLASS="western"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>),
+and after them in a separate script, the import dependent commands
+(i.e. SECTION </FONT></FONT></TT><TT CLASS="western"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>3</FONT></FONT></TT><TT CLASS="western"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>)
+the user should </FONT></FONT></TT><TT CLASS="western"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>select
+the imports</I></FONT></FONT></TT><TT CLASS="western"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>
+and buffer them by using from the &quot;</FONT></FONT></TT><TT CLASS="western"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>Imports</I></FONT></FONT></TT><TT CLASS="western"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>&quot;
+menu the &quot;</FONT></FONT></TT><TT CLASS="western"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>Buffer
+selected imports</I></FONT></FONT></TT><TT CLASS="western"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>&quot;
+option. Issuing multiple &quot;</FONT></FONT></TT><TT CLASS="western"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><I>Buffer
+selected imports</I></FONT></FONT></TT><TT CLASS="western"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>&quot;
+commands, accumulate all the import statements, unless we clear the
+import buffer. </FONT></FONT></TT>
+</P>
+<P ALIGN=JUSTIFY STYLE="line-height: 150%"><TT CLASS="western"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>As
+we expect the script as a whole executes correctly. However, if we do
+not buffer the imports and try to execute statements that depend on
+the imports (e.g. myran = new Ran(17)), without prepending the code
+with them, we fail. However, if we buffer the necessary imports</FONT></FONT></TT><FONT FACE="Times New Roman, serif"><FONT SIZE=3>,
+</FONT></FONT><TT CLASS="western"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>we
+can execute our script conveniently </FONT></FONT></TT><TT CLASS="western"><FONT FACE="Times New Roman, serif"><FONT SIZE=3><B>command-by-command</B></FONT></FONT></TT><TT CLASS="western"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>.
+</FONT></FONT></TT>
+</P>
+<P ALIGN=JUSTIFY STYLE="margin-bottom: 0cm; font-weight: medium; line-height: 150%">
+<BR>
+</P>
+</BODY>
+</HTML>

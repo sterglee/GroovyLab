@@ -1,0 +1,16 @@
+
+N = 800
+
+// create a test matrix
+A = rand(N, N)
+
+fAeigs = asyncheig(A)  // compute the eigenvalues asynchronously (i.e. non-blocking)  with a future
+Aeigs = fAeigs.get()  // get the computation result, blocks until computation completes
+
+fAsvd = asynchsvd(A)  // compute SVD asynchronously (i.e. non-blocking) with a future
+Asvd = fAsvd.get() // get the computation result, blocks until computation completes
+
+b = vrand(N).getv()   // a random vector for right side of linear system A x = b
+
+fx = asynchsolve(A, b)  // solve the linear system asynchronously (i.e. non blocking) with a future
+x = fx.get() // get the solution vector 

@@ -1,0 +1,32 @@
+
+
+N=2000
+
+a1 = ones(N,N);  b1 = ones(N,N)
+a2 = rand(N, N); b2 =  rand(N,N)
+a3 = rand(N, N); b3 = rand(N,N)
+a4 = rand(N, N); b4 = rand(N,N)
+
+// below we start asynchronously some matrix multiplication operations,
+// that are executed on different processor's cores in parallel
+tic()
+x1 = asynchmul(a1, b1)
+x2 = asynchmul(a2, b2)
+x3 = asynchmul(a3, b3)
+x4 = asynchmul(a4, b4)
+
+// retrieve the results of the future computations
+rx1 = x1.get() 
+rx2 = x2.get()
+rx3 = x3.get()
+rx4 = x4.get()
+
+tmasynch = toc() //  time for asynchronous matrix multiplications computation
+
+// now perform  multiplication with the usual blocking calls in order to compare times
+tic()
+xs1 = a1*b1
+xs2 = a2*b2
+xs3 = a3*b3
+xs4 = a4*b4
+tmsserial = toc()

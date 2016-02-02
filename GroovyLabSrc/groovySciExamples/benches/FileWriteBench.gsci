@@ -1,0 +1,14 @@
+
+import java.io.FileWriter
+
+fileName="test.dat"
+
+out = new BufferedWriter(new FileWriter(fileName))
+
+       tic()
+       for (k in 0..10000000)
+         out.write(k+ " ")
+        out.close()
+       tm = toc()   
+
+	   // Windows: 2.5 sec, Linux: 2.35 sec

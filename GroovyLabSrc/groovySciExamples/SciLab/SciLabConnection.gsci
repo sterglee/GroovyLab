@@ -1,0 +1,15 @@
+
+
+import org.scilab.modules.javasci.Scilab
+import org.scilab.modules.types.ScilabType
+import org.scilab.modules.types.ScilabDouble
+
+sci = new Scilab()
+sci.open()
+
+a = new ScilabDouble(java.lang.Math.PI)
+str = sci.put("a", a)
+sci.exec("b = sin(a)")
+b = sci.get("b")
+b
+sci.close()

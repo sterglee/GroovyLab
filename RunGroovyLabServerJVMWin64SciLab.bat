@@ -1,0 +1,1 @@
+java     -server  -d64   -XX:+TieredCompilation -XX:+UseNUMA -XX:+UseParallelGC -XX:+UseCompressedOops -XX:+AggressiveOpts -Djava.library.path=./lib;. -Xss5m -Xms3000m -Xmx9900m  -jar BioGroovyLab.jar

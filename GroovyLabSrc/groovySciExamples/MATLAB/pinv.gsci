@@ -1,0 +1,16 @@
+
+initMatlabConnection()  // init connection to MATLAB
+
+N=10; M=4;
+A = [[1, 2, 3], [4, 5, 9], [5, 6, 7], [-2, 3, 1]] as double[][]
+// compute pseudo-inverse 
+mstr = "Ap = inv(A.' * A)*A.' ; "
+tic()
+meval(mstr, ["A"], ["Ap"])
+tmM=toc()
+
+Ap
+
+// compute pseudo-inverse with Java
+Aj = inv(t(A)*A)*t(A)
+Aj-Ap

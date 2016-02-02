@@ -1,0 +1,39 @@
+
+
+object Fib {
+    
+    def fibIf(n: Int): Int =
+  if (n >= 2)
+    fibIf(n-1)+fibIf(n-2) 
+  else
+    1
+    }
+    
+class Fib {
+    
+   def fibIf(n: Int): Int =
+    if (n>=2)  fibIf(n-1)+fibIf(n-2)
+      else
+     1
+     }
+     
+var start = System.currentTimeMillis()
+Fib.fibIf(40)
+var end = System.currentTimeMillis()
+var timeStatic = end-start
+println("time static = "+timeStatic)
+
+start = System.currentTimeMillis()
+new Fib().fibIf(40)
+end = System.currentTimeMillis()
+var timeInstance = end-start
+println("time instance = "+timeInstance)
+
+                         
+    
+    
+    
+    /*
+time static = 932
+time instance = 927   
+      */     

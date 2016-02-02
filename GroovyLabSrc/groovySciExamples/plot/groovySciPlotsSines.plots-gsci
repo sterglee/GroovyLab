@@ -1,0 +1,15 @@
+
+dt = 0.01;  // sampling frequency
+xl = -10;  xu = 20;  // low and up limits
+t=inc(xl, dt, xu);   // time axis
+f11 = 0.23;  f12 = 3.7;  // two frquencies 
+f21 = 0.25;  f22 = 3.9;  // slightly different frquencies   
+
+x1 = sin(f11*t) + cos(f12*t);
+x2 = sin(f21*t) + cos(f22*t);
+figure(1);  hold("on"); plot(t, x1, Color.RED, "1st sine");
+plot(t, x2, Color.GREEN, "2nd sine");
+x12 = dot(x1, x2);
+plot(t, x12, Color.BLUE, "x1 .* x2");
+
+

@@ -1,0 +1,48 @@
+
+
+def  testDD(v: Array[Array[Double]]) =   {  
+        
+        var nrows = v.length
+        var ncols = v(0).length
+        
+  
+    for (j <- 0 until nrows) {
+      for (k <- 0 until ncols) {
+        v(j)(k) = v(j)(k)+v(k)(j)
+      }
+  }
+ }
+
+
+
+def  wtestDD(v: Array[Array[Double]]) =   {  
+        
+        var nrows = v.length
+        var ncols = v(0).length
+        
+   var j=0
+    while (j < nrows) { 
+      var  k=0
+      while (k < ncols) {
+        v(j)(k) = v(j)(k)+v(k)(j)
+        k += 1
+      }
+      j+=1
+  }
+ }
+
+      
+      
+var    N = 2000
+var    x = Ones(N, N)
+    
+
+    tic()
+    testDD(x)
+    var tmDD = toc()
+
+    tic()
+    wtestDD(x)
+    var wtmDD = toc()
+
+    println("Scala while = "+wtmDD+", time for = "+tmDD)

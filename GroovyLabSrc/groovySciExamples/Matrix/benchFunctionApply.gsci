@@ -1,0 +1,22 @@
+
+
+class fx implements groovySci.math.array.computeFunction {
+  double f(double x) { return x*x*x; }
+}
+
+//@groovy.transform.CompileStatic
+void bench() {
+
+  int N=4000
+  def  cx = {double x-> x*x*x }
+  def x = ones(N, N)+0.1
+  fxo = new fx()
+  tic()
+  x. mapf( fxo)
+  def tm = toc()
+  println("tm = "+tm)
+}
+
+
+bench()
+ 

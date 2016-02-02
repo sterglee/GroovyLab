@@ -1,0 +1,10 @@
+
+ x = Inc(0, 0.01, 20)
+
+ y = sin(0.56*x)
+
+setscatterPlotTitlefx("A sine function  plotted with JavaFX")
+
+setscatterPlotNamefx(" sin function")
+scatterplotfx(x, y)
+

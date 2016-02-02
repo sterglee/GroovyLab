@@ -1,0 +1,8 @@
+
+@CompileJava
+double [] f() {
+	double [] x=DoubleStream.of(1.2,3.5).toArray();
+	return x;
+}
+
+y= f()

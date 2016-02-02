@@ -1,0 +1,35 @@
+
+// Solve the 4X4 linear system of equations Ax=b, where A is the Hilbert matrix,
+//      for which Ai,j=1/(i+j-1), i, j=1, ..., 4, and b_i=1/(2+i), i=1, ..., 4
+ 
+ 
+//  b: double b[1:n]
+//    entry:  the right-hand side of the linear system
+//    exit:    if aux[3] = n, then the calculated solution of the linear system is overwritten on b, else b remains unaltered
+b = new double[5];   
+ 
+// aux:  double aux[1:3]
+//       entry:    aux[2]:  a relative tolerance; a resonable choice for this value is an estimate of the relative precision
+//                 of the matrix elements; however, it should not be chosen smaller than the machine precision
+//       exit:      aux[1]: if R is the number of elimination steps performed (see aux[3]), then aux[1] equals 1 if the determinant of the principal 
+//                 submatrix of order R is positive, else aux[1]=-1
+//                   aux[3]: the number of elimination steps performed, if aux[3] < n then the process is terminated and no solution will be calculated
+aux = new double[4];
+aux[2] = 1.0e-5;
+
+// a:   double a[1:n, 1:n];
+//       entry:   the n-th order matrix;
+//         exit:     the calculated lower triangular matrix and unit upper triangular matrix with its unit diagonal omitted 
+ a =  new double[5][5];
+ N = 4;   // the order of the linear system
+ for (i=1; i<=N; i++) {
+   for (j=1; j<=N; j++) a[i][j] = 1.0/(i+j-1);
+   b[i] = a[i][3];
+ }
+ A = new Matrix(a, 1);
+ 
+ result = A.decsol(aux, b);
+
+   fiveDigit = new DecimalFormat("0.00000E0");
+   println("Solution:  " + fiveDigit.format(result[1][1]) +   "  " + fiveDigit.format(result[1][2]) + "  " +    fiveDigit.format(result[1][3]) + "  " + fiveDigit.format(result[1][4]));
+   println("Sign(Det) = " + (int)aux[1] +   "\nNumber of eliminations = " + (int)aux[3]);

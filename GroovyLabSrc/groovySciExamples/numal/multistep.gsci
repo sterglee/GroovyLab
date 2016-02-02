@@ -1,0 +1,64 @@
+
+// this script demonstrates the call of the NUMAL Analytic_problems.multistep() method from Groovy
+
+    first = new boolean[1];
+    btmp = new boolean[2];
+    itmp = new int[3];
+    xtmp = new double[7];
+    x = new double[1];
+    y = new double[13];
+    ymax = new double[3];
+    d = new double[53];
+    jac = new double[3][3];
+    xout = new Vector();
+    yout = new Vector();
+    
+    testmultistep = new Test_multistep();
+    hmin=1.0e-10;
+    eps=1.0e-9;
+    first[0]=true;
+    x[0]=0.0;
+    y[1]=y[2]=0.0;
+    ymax[1]=0.0001;
+    ymax[2]=1.0;
+    System.out.println("Delivers with hmin = " +hmin + "  and eps = " + eps);
+    for (i=1; i<=10; i +=9) {
+      xend=i;
+      Analytic_problems.multistep(x,xend,y,hmin,5,ymax,eps,first, d,testmultistep,jac,true,2,btmp,itmp,xtmp, xout, yout);
+      System.out.println("   " + y[1] +     "   " + y[2]);
+    }
+    xSiz = xout.size();
+    ySiz = yout.size();
+	
+
+public class Test_multistep extends Object  implements AP_multistep_methods {
+	
+
+  public void deriv(double [] f, int n, double [] x, double [] y)
+  {
+    double r;
+
+    f[2]=r=3.0e7*y[1]*y[1];
+    f[1]=0.04*(1-y[1]-y[2])-1.0e4*y[1]*y[2]-r;
+  }
+
+
+  public boolean available(int n, double [] x, double [] y, double [][] jac)
+  {
+    double r;
+
+    r = 6.0e7*y[1];
+    jac[2][1]= r;
+    jac[1][1] = -0.04-1.0e4*y[2]-r;
+    jac[1][2] = -0.04-1.0e4*y[1];
+    jac[2][2]=0.0;
+    return true;
+  }
+
+
+  public void out(double h, int k, int n, double [] x, double []y)
+  {
+    return;
+  }
+}
+

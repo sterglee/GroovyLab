@@ -1,0 +1,21 @@
+
+// specify the IP of the GroovyLab computation server
+specifyServerIP("195.130.94.125") 
+
+   // we should note that the server should be called initServer()  to initialize network computation services
+  // initialize the client subsystem 
+//initLocalHostClient()
+initClient()
+// perform now a remote SVD then a local and compare times
+N = 1000
+
+x = Rand(N,N)
+
+tic()
+svdx = netSVD(x)
+tmnet = toc()
+
+
+tic()
+lsvd = svd(x)
+tmlocal = toc() 

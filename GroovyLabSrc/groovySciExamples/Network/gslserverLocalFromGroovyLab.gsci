@@ -1,0 +1,31 @@
+
+initLocalHostClient()
+
+N=500
+x = rand(N,N)
+evals = new double [2][N]
+
+
+
+eigOperationCode = 1
+
+gExec.Interpreter.GlobalValues.writer.writeInt(eigOperationCode)
+
+// write #rows and #cols of the matrix
+rows = N
+
+gExec.Interpreter.GlobalValues.writer.writeInt(rows)
+gExec.Interpreter.GlobalValues.writer.flush()
+
+tic()
+for (r in 0..N-1)
+ for (c in 0..N-1)
+   gExec.Interpreter.GlobalValues.writer.writeDouble(x[r][c])
+
+  gExec.Interpreter.GlobalValues.writer.flush()
+  
+for (r in 0..1)
+ for (c in 0..N-1)
+  evals[r][c] =  gExec.Interpreter.GlobalValues.reader.readDouble()
+tmGSLsocket = toc()
+ 

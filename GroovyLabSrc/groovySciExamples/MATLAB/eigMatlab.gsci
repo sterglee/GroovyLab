@@ -1,0 +1,45 @@
+// perform an eigenvalue computation using MATLAB
+
+initMatlabConnection()  // init connection to MATLAB
+
+N=100
+A = Rand(N, N)
+
+
+// solve with MATLAB, eigenvalues only
+mstr = "eA = eig( A) "
+
+// evaluate the eigenvalues with the meval() that permits the returning
+// of complex values with the MatlabComplex class
+// The MatlabComplex class keeps the real values with the re field which is double [][]
+// and the imaginary with the im field which is also double [][[]
+tic()
+meval(mstr,  ["A"], ["eA"] )
+tmm = toc()
+
+realParts = eA.re   // the real parts of the computed eigenvalues
+imParts = eA.im   // the imaginary parts of the computed eigenvalues
+
+// solve with MATLAB, eigenvalues and eigenvectors
+mallstr = "[evals, evecs] = eig( A) "
+
+// evaluate the eigenvalues with the meval() that permits the returning
+// of complex values with the MatlabComplex class
+// The MatlabComplex class keeps the real values with the re field which is double [][]
+// and the imaginary with the im field which is also double [][[]
+tic()
+meval(mallstr,  ["A"], ["evals",  "evecs"] )
+tmmall = toc()
+
+realPartsEvals = evals.re   // the real parts of the computed eigenvalues
+imPartsEvals = evals.im   // the imaginary parts of the computed eigenvalues
+realPartsEvecs = evecs.re   // the real parts of the computed eigenvectors
+imPartsEvecs = evecs.im   // the imaginary parts of the computed eigenvectors
+
+
+
+
+// solve with Java
+tic()
+jeA = eig(A)
+tmJ = toc()

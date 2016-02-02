@@ -1,0 +1,39 @@
+
+import  static com.nr.NRUtil.SQR
+import com.nr.sp.WelchWin
+import com.nr.sp.Spectolap
+import com.nr.sp.Spectreg
+
+ 
+
+pi = acos(-1.0)
+
+N = 1024
+M = (int)(N/2)
+
+spec = new double [M+1]
+freq = new double[M+1]
+
+   // Test Spectreg
+ welch = new  WelchWin()
+ sp=new Spectreg(M)
+  
+  
+     // Generate a data set
+  t = vlinspace(0, 10, N)
+  data = sin(10.34*t)+3.4*cos(5.3*t)
+      
+     sp.adddataseg(data.v, welch)
+     spec=sp.spectrum()
+     freq=sp.frequencies()
+
+  
+    
+    
+
+figure(1); subplot(2, 1, 1); plot(data, "Data")
+
+subplot(2, 1, 2); plot(freq, spec, "spectrum")
+
+
+

@@ -1,0 +1,14 @@
+
+class problem {
+    Sparse  A
+    Sparse  C
+    int sym
+    double [] x
+    double [] b
+    double [] resid
+
+  problem  getProblem( 
+}
+
+  s =    loadSparse("L:\\NBProjects\\CSPARSEJ\\CSparseJ\\matrix\\mbeacxc")
+ 

@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1253">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 2.2  (Win32)">
+	<META NAME="CREATED" CONTENT="0;0">
+	<META NAME="CHANGED" CONTENT="20110424;10021572">
+	<STYLE TYPE="text/css">
+	<!--
+		@page { size: 21.01cm 29.69cm }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<P><BR><BR>
+</P>
+<P><FONT SIZE=6 STYLE="font-size: 22pt"><U><B>Description of the
+EJMLMat class</B></U></FONT></P>
+<P ALIGN=JUSTIFY STYLE="font-weight: medium; text-decoration: none">The
+<B>EJMLMat</B> class implements zero-indexed two-dimensional dense
+matrices in GroovySci that are based upon the Efficient Java Matrix
+Library.</P>
+<P><BR><BR>
+</P>
+<P><FONT SIZE=4><U><B>Constructors</B></U></FONT></P>
+<P><BR><BR>
+</P>
+<P><SPAN STYLE="text-decoration: none"><B>Mat(int rows, int cols) </B></SPAN><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-weight: medium">//
+Creates a EML Mat of size rows, cols initialized to zeros</SPAN></SPAN></P>
+<P STYLE="font-weight: medium; text-decoration: none"><A NAME="__DdeLink__3_1047709065"></A>
+ <I>m=new Mat(2, 3)</I></P>
+<P STYLE="font-weight: medium; text-decoration: none"><I>m.print() //
+print the contents</I></P>
+<P><BR><BR>
+</P>
+<OL START=3>
+	<P><B>Construction by specifying the initial elements, e.g.</B></P>
+	<P STYLE="font-weight: medium"><A NAME="__DdeLink__9_1047709065"></A><A NAME="__DdeLink__5_1047709065"></A>
+	<I>var m = M(&quot;4.5 5.6 -4; 4.5 3 -3.4&quot;) // space separated</I></P>
+	<P STYLE="font-weight: medium"><A NAME="__DdeLink__11_1047709065"></A>
+	<I>var m = M(&quot;4.5, 5.6, -4; 4.5, 3, -3.4&quot;) // comma
+	separated</I></P>
+</OL>
+<P STYLE="font-weight: medium; text-decoration: none"><A NAME="DDE_LINK"></A>
+// construct Mat by copying the array values</P>
+<P><A NAME="DDE_LINK3"></A><SPAN STYLE="text-decoration: none"><B>Mat(da:
+Array[Array[Double]]) </B></SPAN><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-weight: medium">//
+Creates an EJML Mat initialized with the da array</SPAN></SPAN></P>
+<P><A NAME="__DdeLink__13_1047709065"></A><I>var dd = new
+Array[Array[Double]](2,4)</I></P>
+<P><I>dd(1)(1)=11</I></P>
+<P><I>var mdd = new Mat(dd)</I></P>
+<P><I>mdd.print // print finally the EJML Matrix</I></P>
+<P><BR><BR>
+</P>
+<P><U><B>Operators</B></U></P>
+<P>Matrix addition, subtraction and multiplication has been
+overloaded and works properly. Also addition and multiplication with
+scalars operates properly, e.g.</P>
+<P><BR><BR>
+</P>
+<P><I>var m1 = rand0(4,7)</I></P>
+<P><I>var m2 = rand0(7, 9)</I></P>
+<P><I>var mmul = m1*m2 // multiplication</I></P>
+<P><I>var madd = m1+7*m1+m1*9.4</I></P>
+<P><BR><BR>
+</P>
+<P STYLE="font-style: normal"><U><B>Basic Methods</B></U></P>
+<P STYLE="font-style: normal; text-decoration: none"><B>def getv:
+Array[Array[Double]] </B><SPAN STYLE="font-weight: medium">// returns
+the Java 1-D double array used to store the contents of the matrix</SPAN></P>
+<P STYLE="font-style: normal; text-decoration: none"><A NAME="DDE_LINK2"></A>
+<B>def size: (Int, Int)</B> <SPAN STYLE="font-weight: medium">//
+Returns the number of rows and columns of the Mat</SPAN></P>
+<P STYLE="font-weight: medium; text-decoration: none"><I>var md =
+ones0(9)</I></P>
+<P STYLE="font-weight: medium; text-decoration: none"><I>md.size</I></P>
+<P STYLE="font-style: normal; text-decoration: none"><B>def length:
+Int </B><SPAN STYLE="font-weight: medium">// Returns the number of
+rows of Mat</SPAN></P>
+<P STYLE="font-weight: medium; text-decoration: none"><I>var md =
+ones0(9, 2)</I></P>
+<P STYLE="font-weight: medium; text-decoration: none"><I>md.length</I></P>
+<P STYLE="font-style: normal; text-decoration: none"><B>def Nrows:
+Int </B><SPAN STYLE="font-weight: medium">// Returns the number of
+rows of Mat</SPAN></P>
+<P STYLE="font-weight: medium; text-decoration: none"><I>md.Nrows</I></P>
+<P><B>def Ncols: Int</B> <SPAN STYLE="font-weight: medium">// Returns
+the number of columns of Mat</SPAN></P>
+<P><I>md.Ncols</I></P>
+<P><BR><BR>
+</P>
+<P><U><B>Routines</B></U></P>
+<P><BR><BR>
+</P>
+<P><B>def ones0(n: Int): Mat - </B><SPAN STYLE="font-weight: medium">constructs
+a nXn Mat of ones</SPAN></P>
+<P><B>def ones0(n: Int, m: Int): Mat </B><SPAN STYLE="font-weight: medium">-
+constructs a nXm Mat of ones</SPAN></P>
+<P><B>def zeros0(n: Int): Mat - </B><SPAN STYLE="font-weight: medium">constructs
+a nXn Mat of zeros</SPAN></P>
+<P><B>def zeros0(n: Int, m: Int): Mat </B><SPAN STYLE="font-weight: medium">-
+constructs a nXm Mat of zeros</SPAN></P>
+<P><B>def rand0(n: Int): Mat - </B><SPAN STYLE="font-weight: medium">constructs
+a nXn Mat of random values</SPAN></P>
+<P><B>def rand0(n: Int, m: Int): Mat </B><SPAN STYLE="font-weight: medium">-
+constructs a nXm Mat of random values</SPAN></P>
+<P STYLE="font-weight: medium"><I>var rr = rand0(5,8)</I></P>
+<P><B>Apply Operators</B></P>
+<P STYLE="font-weight: medium"><I>var rr = rand0(5,8)</I></P>
+<P STYLE="font-weight: medium"><I>var rr01 = rr(0,1) // gets the
+corresponding double value</I></P>
+<P STYLE="font-weight: medium"><I>var r0 = rr(0) // extracts the 0<SUP>th</SUP>
+row</I></P>
+<P><BR><BR>
+</P>
+<P><B>Update Operators</B></P>
+<P STYLE="font-weight: medium"><I>rr(0,1) = 99 // sets the
+corresponding element</I></P>
+<P><BR><BR>
+</P>
+<P><B>Transpose matrix</B></P>
+<P STYLE="font-weight: medium"><I>var mm = ones0(9, 2)</I></P>
+<P STYLE="font-weight: medium"><I>var mmt = mm.transpose </I>
+</P>
+<P STYLE="font-weight: medium"><I>var mmt = transpose(mm) //
+alternative interface</I></P>
+<P STYLE="font-style: normal"><B>Also the ~ operator can be used for
+transposing matrices,</B></P>
+<P STYLE="font-style: normal"><B>e.g. </B>
+</P>
+<P STYLE="font-style: normal; font-weight: medium">var myMat =
+rand0(2, 8)</P>
+<P STYLE="font-style: normal; font-weight: medium">var tMyMat =
+myMat~ // transposed</P>
+<P><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+<P STYLE="font-style: normal"><B>Inverse matrix</B></P>
+<P STYLE="font-weight: medium"><I>var mm= rand0(8)</I></P>
+<P STYLE="font-weight: medium"><I>var mmi = inv(mm) // get the
+inverse</I></P>
+<P STYLE="font-weight: medium"><I>var oned = mm*mmi // verify that
+indeed we get the inverse</I></P>
+<P><BR><BR>
+</P>
+<P><B>Solve Linear System</B></P>
+<P><I>var A = M(&quot;3 -1 1; -1 3 1; 1 1 3&quot;)</I></P>
+<P><I>var b = M(&quot;3; -5; -4&quot;)</I></P>
+<P><I>var x = A.solve(b) // solve thye system</I></P>
+<P><I>var bres = A*x // estimate the quality of the solution </I>
+</P>
+<P><I>var diff = b-bres</I></P>
+<P><BR><BR>
+</P>
+</BODY>
+</HTML>

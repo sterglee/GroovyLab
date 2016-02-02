@@ -1,0 +1,13 @@
+x= Rand(900)
+
+xd = new JFplot.DoubleVector(x)
+
+
+y= Rand(900)
+
+yd = new JFplot.DoubleVector(y)
+
+xychart = JFplot.Charts.xyplot("xy", xd, yd)
+
+
+JFplot.Charts.showChart(xychart, "test") 

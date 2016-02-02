@@ -1,0 +1,20 @@
+
+n=1700; m=1901; k = 2306
+a =  rand(n,m); b = rand(m, k)
+
+tic()
+c = a * b
+tmp = toc()
+
+tic()
+cs = groovySci.math.array.SerialMult.times(a.getArray(), b.getArray())
+tms = toc()
+
+
+tic()
+csjm = groovySci.math.array.ParallelMult.pmulJavaMulti(a.getArray(), b.getArray())
+tmjm = toc()
+
+
+
+max(max(abs(csjm-cs)))

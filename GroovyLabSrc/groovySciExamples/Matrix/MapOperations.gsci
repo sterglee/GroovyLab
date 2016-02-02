@@ -1,0 +1,41 @@
+n = 3000
+
+x = ones(n, n)
+
+// the closure to be mapped to the Matrix
+ mul10 = { double x ->  x*10.0}
+
+// parallel map operation
+tic()
+xx = x.pmap(mul10)
+tmp = toc()
+
+
+// serial map operation
+tic()
+xx2 = x.map(mul10)
+tms = toc()
+
+// serial in-place map operation
+xxi = ones(n,n)
+tic()
+xxi.map(mul10)
+tmsi = toc()
+
+// parallel map in-place
+tic()
+ x.pimap(mul10)
+tmip = toc()
+
+// test with direct function application
+class ff implements computeFunction {
+	double f(double x) {
+		return x*10.0
+	}
+}
+
+fxo = new ff()
+
+tic()
+fxx = x.mapf(fxo)
+tmf = toc()

@@ -1,0 +1,28 @@
+// perform an FFT using MATLAB
+
+initMatlabConnection()  // init connection to MATLAB
+
+N=2**20
+t = linspace(0, 1, N)
+
+x = cos(23.6*t)+rand(1, N)
+x=x.getArray()
+fftstr = " y = fft(x); "
+
+tic()
+// perform the FFT using MATLAB using
+// meval() that takes a real double [][] array as input and produces MatlabComplex [][] array as output
+meval(fftstr, ["x"], ["y"])   // Real - Complex FFT
+tmMatlab = toc()
+
+yre = y.re   // the real values of the FFT
+yim = y.im  // the imaginary values of the FFT
+
+// perform now a Complex-Complex FFT
+
+fftcomplxstr = "y2 = fft(y);"
+meval(fftcomplxstr, ["y"], ["y2"])
+
+tic()
+yj = fft(x)
+tmj = toc()

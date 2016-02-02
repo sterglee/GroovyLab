@@ -1,0 +1,32 @@
+
+
+
+// the Ikeda map
+// avoids BigDecimal type by explicitly specifying double
+def c1 = 0.4d;
+def c2 = 0.9d;
+def c3 = 9.0d;
+def rho = 0.85d;
+
+def x = 0.5d; def y = 0.5d;
+//niters = getInt("How many iterations of the Ikeda map");
+def niters = 200000
+def xall = new double[niters]
+def yall = new double[niters]
+
+tic() 
+for (k in 1..niters-1)  {
+  def xp = x; def  yp=y
+  def taut = c1-c3/(1.0d+xp*xp+yp*yp)
+  x = rho + c2*xp*cos(taut)-yp*sin(taut)
+  y = c2*(xp*sin(taut)+yp*cos(taut))
+  xall[k] = x
+  yall[k] = y
+}
+
+tm = toc()
+scatterPlotsOn()
+figure(1)
+plot(xall, yall, "time = "+tm)
+
+

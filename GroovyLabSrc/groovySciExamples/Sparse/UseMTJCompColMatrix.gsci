@@ -1,0 +1,12 @@
+
+import no.uib.cipr.matrix.sparse.*
+import no.uib.cipr.matrix.*
+
+// construct an MTJ DenseMatrix
+dm = new DenseMatrix(5,5)
+dm.set(2,2, 88)  
+
+// construct a Sprase Matrix from it
+sdm = new CompColMatrix( dm, true)
+
+sdm.set(4, 3, 3.3)

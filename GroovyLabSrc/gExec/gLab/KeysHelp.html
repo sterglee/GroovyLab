@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1253">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 2.2  (Win32)">
+	<META NAME="CREATED" CONTENT="0;0">
+	<META NAME="CHANGED" CONTENT="20130720;11452452">
+	<STYLE TYPE="text/css">
+	<!--
+		@page { size: 21cm 29.7cm; margin: 2.01cm }
+		P { margin-bottom: 0.2cm }
+		PRE { font-family: "Times New Roman" }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="el-GR" DIR="LTR">
+<PRE LANG="en-US" STYLE="line-height: 150%"><FONT SIZE=6 STYLE="font-size: 22pt"><B>Help on the basic editor's keystrokes</B></FONT>
+
+
+<FONT SIZE=5><SPAN LANG="en-US"><B>F6</B>:    executes selected text  or current line.</SPAN></FONT>
+
+<FONT SIZE=5><SPAN LANG="en-US"><B>Shift-F6</B>:    executes selected text  or current line with a separate thread .</SPAN></FONT>
+
+
+<FONT SIZE=5><SPAN LANG="en-US"><B>F5:  </B>clears the output console</SPAN></FONT>
+
+<FONT SIZE=5><SPAN LANG="en-US"><B>F11:  </B>replace abbreviations &ndash; The abbreviations list file is initialized at the first time F11 is used.</SPAN></FONT>
+
+<FONT SIZE=5><SPAN LANG="en-US"><B>Double click </B>on an identifier: Displays its value.                                </SPAN></FONT>
+
+<FONT SIZE=5><SPAN LANG="en-US"><B>Ctrl-SPACE</B>:     Code Completion, <B>global</B> <SPAN STYLE="font-weight: medium">completion when in &ldquo;</SPAN><B>Global</B>&rdquo; <SPAN STYLE="font-weight: medium">mode, field</SPAN> <SPAN STYLE="font-weight: medium">completion using Java reflection when in &ldquo;</SPAN><B>Groovy</B>&rdquo; <SPAN STYLE="font-weight: medium">mode</SPAN></SPAN></FONT>
+
+<FONT SIZE=5><SPAN LANG="en-US"><B>F2:   </B>executes code up to cursor position </SPAN></FONT>
+
+<FONT SIZE=5><SPAN LANG="en-US"><B>F4:  </B>displays a completion list for an identifier (<FONT SIZE=5><SPAN LANG="en-US">Use </SPAN></FONT><FONT SIZE=5><SPAN LANG="en-US"><B>ENTER</B></SPAN></FONT> <FONT SIZE=5><SPAN LANG="en-US">or </SPAN></FONT><FONT SIZE=5><SPAN LANG="en-US"><B>mouse double click</B></SPAN></FONT>  <FONT SIZE=5><SPAN LANG="en-US">to select an entry </SPAN></FONT><FONT SIZE=5><SPAN LANG="en-US"><B>ESC</B></SPAN></FONT> <FONT SIZE=5><SPAN LANG="en-US">to clear it)  </SPAN></FONT></SPAN></FONT>
+
+
+
+<FONT SIZE=5><SPAN LANG="en-US"><B>Shift-F4:  </B>displays a completion list for a class name, for example to selecting org.jblas.DoubleMatrix and pressing Shift-F4 inspects this class.</SPAN></FONT>
+
+<FONT SIZE=5><SPAN LANG="en-US"><B>F12:  </B>updates the GroovySci's variables binding. The updated variables are available for code completion.</SPAN></FONT>
+
+<FONT SIZE=5><SPAN LANG="en-US"><B>F8 with selected text:  </B>buffers the selected import statements</SPAN></FONT>
+
+<FONT SIZE=5><SPAN LANG="en-US"><B>Ctrl-F8 with selected text:  </B>buffers the selected code.</SPAN></FONT>
+
+
+<FONT SIZE=5><SPAN LANG="en-US"><B>F9 with not any selected text:  </B>compiles and execute a Java class consisted of the whole text in editor.</SPAN></FONT>
+
+<FONT SIZE=5><SPAN LANG="en-US"><B>F9 with selected text that specifies some methods:  </B>compiles and executes these methods as static methods of a Java class. Then these methods can be used from GroovyLab scripts. </SPAN></FONT>
+
+<FONT SIZE=5><SPAN LANG="en-US"><B>F7:  </B>creates a stand alone Java application with the functionality of the Groovy script.</SPAN></FONT>
+
+<FONT SIZE=5><SPAN LANG="en-US"><B>F10:  </B>browses the properties of the class of a selected identifier</SPAN></FONT>
+
+
+<FONT SIZE=5><SPAN LANG="en-US">Select text (e.g. <I>svd</I>) and press <B>F1</B> displays autocompletion info on that item.</SPAN></FONT>
+
+
+<FONT SIZE=5><SPAN LANG="en-US"><B>Completion  Notes</B></SPAN></FONT>
+
+<FONT SIZE=2 STYLE="font-size: 11pt"><SPAN LANG="en-US">The <I>RSyntaxArea </I>editor supports two modes of code completion, the <I>Global </I><SPAN STYLE="font-style: normal">mode and the Groovy</SPAN> <SPAN STYLE="font-style: normal">mode.  The menu </SPAN>&ldquo;<I>Completion&rdquo; </I><SPAN STYLE="font-style: normal">can be used to switch between these two completion modes, with the submenu option: </SPAN></SPAN></FONT>
+&ldquo; <FONT SIZE=2 STYLE="font-size: 11pt"><SPAN LANG="en-US"><I>Toggle Global/Groovy completion mode, current mode is: .... &ldquo;</I></SPAN></FONT>
+<FONT SIZE=2 STYLE="font-size: 11pt"><SPAN LANG="en-US">That submenu also displays the current completion mode. Also the current completion mode is saved upon GroovyLab exit and is available for the next working session.</SPAN></FONT>
+
+<FONT SIZE=2 STYLE="font-size: 11pt"><SPAN LANG="en-US">The &ldquo;<I>Global&rdquo; </I>completion mode is useful to remind the large number of  routines of GroovyLab. Also,  many of these routines are overloaded and thus it is more difficult for the user to remember their usage. One good example is the <I>plot()</I> routines that has a lot of overloaded versions. The user can simply type <I>plot</I> and then CTRL-SPACE, while RsyntaxArea is in &ldquo;Global&rdquo; completion mode. The code completion feature of the RsyntaxArea editor reminds the user of all the overloaded versions of plot.</SPAN></FONT>
+<FONT SIZE=2 STYLE="font-size: 11pt"><SPAN LANG="en-US">Also, we can from the &ldquo;<I>Completion</I>&rdquo; menu expand the completion lists available at the &ldquo;Global&rdquo; completion mode using information extracted from libraries using Java reflection. </SPAN></FONT>
+
+<FONT SIZE=2 STYLE="font-size: 11pt"><SPAN LANG="en-US">The &ldquo;Groovy&rdquo; completion mode can also be very useful for other completion tasks.  That mode extracts information using <I>Java Reflection. </I></SPAN></FONT>
+<FONT SIZE=2 STYLE="font-size: 11pt"><SPAN LANG="en-US">Very convenient is the member completion feature. Suppose that we execute the command:</SPAN></FONT>
+ <FONT SIZE=2 STYLE="font-size: 11pt"><SPAN LANG="en-US"><I>xx = new JFrame(&quot;test&quot;)</I></SPAN></FONT>
+<FONT SIZE=2 STYLE="font-size: 11pt"><SPAN LANG="en-US">Then we can easily remember the many fields/methods of the <I>javax.swing.JFrame </I>class, using:</SPAN></FONT>
+<FONT SIZE=2 STYLE="font-size: 11pt"><SPAN LANG="en-US"><I>xx.</I> &lt;CTRL-SPACE&gt;</SPAN></FONT></PRE>
+</BODY>
+</HTML>
