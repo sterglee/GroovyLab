@@ -1,5 +1,6 @@
 package  utils;
 
+import gExec.Interpreter.GlobalValues;
 import java.lang.Math;
 import java.util.StringTokenizer;
 import java.util.Properties;
@@ -679,7 +680,7 @@ public final class Utils {
 
     Class c = null;
     try {
-      c = Class.forName(className);
+      c = GlobalValues.GroovyShell.getClassLoader().loadClass(className);
     } catch (Exception ex) {
       throw new Exception("Can't find class called: " + className);
     }

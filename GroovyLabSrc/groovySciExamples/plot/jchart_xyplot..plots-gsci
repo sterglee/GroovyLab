@@ -1,3 +1,7 @@
+
+import JFplot.DoubleVector
+import JFplot.Charts
+            
 x= Rand(900)
 
 xd = new JFplot.DoubleVector(x)

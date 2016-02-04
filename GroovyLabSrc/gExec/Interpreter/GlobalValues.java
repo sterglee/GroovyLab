@@ -43,7 +43,7 @@ import org.scilab.modules.javasci.Scilab;
 // this class contains important global definitions and constants
 public class GlobalValues
 {  
-    static public   String  dateOfBuild =  "2-Feb-2016";       // tracks the date of build    
+    static public   String  dateOfBuild =  "4-Feb-16";       // tracks the date of build    
     
     
  //  static public Future<String> commandFuture = null;  // not used yet!
@@ -1140,8 +1140,8 @@ if (globallmportCustomizer == null) {
             "gExec.Interpreter.SciLabConnection",
             "java.lang.Math",
             
-            "JFplot.DoubleVector",
-            "JFplot.Charts", 
+            //"JFplot.DoubleVector",
+            //"JFplot.Charts", 
             
             "org.sound.SoundUtils",
             "net.GroovyLabNet",
@@ -1175,8 +1175,8 @@ if (globallmportCustomizer == null) {
             "groovy.swing.SwingBuilder", "java.text.DecimalFormat",
             "groovySci.FFT.ApacheFFT", 
             
-            "JFplot.DoubleVector",
-            "JFplot.Charts", 
+            //"JFplot.DoubleVector",
+            //"JFplot.Charts", 
             
             "org.sound.SoundUtils",
             

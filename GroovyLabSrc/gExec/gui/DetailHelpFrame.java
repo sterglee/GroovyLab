@@ -47,7 +47,7 @@ public class DetailHelpFrame extends JFrame    {
     if (helpString==null) helpString="";
     
         try {
-         Class selectedClass = Class.forName(selectedItem);
+         Class selectedClass = GlobalValues.GroovyShell.getClassLoader().loadClass(selectedItem);
          helpString += ReflectionUtils.getConstructors(selectedClass);
          helpString += ReflectionUtils.getMethods(selectedClass);
          helpString += ReflectionUtils.getFields(selectedClass);

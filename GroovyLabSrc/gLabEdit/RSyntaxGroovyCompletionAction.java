@@ -155,8 +155,7 @@ public static void collectInfoWithReflection(String nameOfType)
     
          Class cl=null;
          try {
-           cl = Class.forName(nameOfType);
-             
+           cl = GlobalValues.GroovyShell.getClassLoader().loadClass(nameOfType);  
           
          // retrieve the methods of the class using Java reflection
     java.lang.reflect.Method []  classMethods = cl.getMethods();
