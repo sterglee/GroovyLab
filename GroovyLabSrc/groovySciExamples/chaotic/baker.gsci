@@ -1,0 +1,31 @@
+
+
+x = (double)0.1; y = (double)0.22;
+//niters = getInt("How many iterations of the Ikeda map");
+niters = 60000
+xall = new double[niters]
+yall = new double[niters]
+
+y13 = (double)1.0/(double)3.0
+y23 = (double)2.0/(double)3.0
+tic() 
+for (k in 1..niters-1)  {
+  xp = x; yp=y
+ if (y<=0.5) {
+   y = 2*yp
+   x = y13*xp
+}
+else {
+  x = y13*xp+y23
+  y = 2*yp - 1
+  }
+
+  xall[k] = x
+  yall[k] = y
+}
+
+tm = toc()
+scatterPlotsOn()
+figure(1)
+plot(xall, yall, "time = "+tm)
+

@@ -1,0 +1,14 @@
+
+
+javac Main.java
+javah Main
+
+nvcc -shared -arch=sm_13 -Xcompiler -fPIC, -o KernelOps.so  KernelOps.cu 
+
+
+nvcc -I "C:\Program Files\Java\jdk1.7.0_25\include" -shared  -arch=sm_13  -Xcompiler -LD KernelOps.cu
+ren a.exe KernelOps.dll
+
+java Main
+
+nvcc -shared -I/usr/local/cuda-5.5/include/,/usr/local/cuda-5.5/samples/common/inc/   -Xcompiler -fPIC, -o KernelOps.so  -LD -lcublas KernelOps.cu

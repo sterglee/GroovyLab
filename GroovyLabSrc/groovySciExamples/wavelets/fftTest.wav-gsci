@@ -1,0 +1,32 @@
+
+import groovySci.math.array.Matrix;
+import static groovySci.math.array.Matrix.*
+import numal.*
+import static groovySci.math.plot.plot.*
+import static java.lang.Math.*
+                   
+ int  NPoints = 513;
+
+ a = new double[NPoints];
+ gamn = new double[3];
+
+    x=0.9;
+    n=NPoints-1;
+    n2=n/2;
+    xi=1.0;
+    i=1;    
+    while (i<=n) {
+      a[i]=xi;
+      xi=x*xi;
+      i++;	
+    }
+   origSignal = a.clone();  // keep the original signal
+
+
+  // perform the FFT
+    y = fft(a)
+ 
+figure(1); subplot(2,1,1); plot(origSignal, "Original Signal");
+             subplot(2,1,2); plot(y.realFFTs, "FFT"); 
+				
+				

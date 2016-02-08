@@ -1,0 +1,1 @@
+cc -fPIC -I/usr/local/openjdk8/include/ -I//usr/local/openjdk8/include/freebsd -shared -o freebsdCCOps.so  CCOpsJNI.cpp

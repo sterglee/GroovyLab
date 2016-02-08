@@ -1,0 +1,38 @@
+
+clear("all")
+
+
+fs = 600   // 2050; 
+dt = 1/fs 
+t =  inc(1, dt, 4)
+
+PI2 = 2*PI
+y = sin(PI2*10*t)+4*     cos(PI2*4*t)
+y = y+5*rand(y.size()[0], y.size()[1])
+
+for (k in 0..y.length()-1) 
+  y[0][ k] = y[0][k]+2*sin(PI2*2*k);
+
+fstart = 1;  // frequency to start
+fmax = (double)fs/2;
+maxNf = 20;
+
+
+linlog = "log";
+stepfac=16; 
+df0=3;
+
+
+ycwt = new wavelets.CWT(y,  fs, fmax, maxNf, linlog, stepfac, df0);
+
+ed = ycwt.ed();  // energy density coefficients as a double[][] vector
+
+edm = new Matrix(ed);
+subsampledEdm = edm.resample(5, 1);  // subsample matrix before displaying it in contour plot
+figure(1); 
+subplot(2,1,1);
+plot(y); title("signal");
+subplot(2,1,2);
+ plot2d_scalogram(subsampledEdm, "scalogram");
+//figure(2);
+//plot2d_contour(subsampledEdm, "contour")

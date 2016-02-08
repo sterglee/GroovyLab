@@ -1,0 +1,13 @@
+
+N = 10
+a = Rand(N,N)
+
+NR.SVD.svd(a)  // perform a NR SVD
+
+u = NR.SVD.getU()
+w = NR.SVD.getW()
+v = NR.SVD.getV()
+
+reconsA = u*diag(w)*t(v)
+shouldBeNearZero = max(max(abs(a-reconsA)))
+

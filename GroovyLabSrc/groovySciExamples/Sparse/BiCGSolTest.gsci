@@ -1,0 +1,9 @@
+
+a = [[1, 2, 0], [-1, 0, -2], [-3, -5, 1]] as double [][]
+
+b = [3, -5, -4] as double []
+am = new CCMatrix(a)
+
+sol = am.BiCGSolve(am, b)
+
+solEJML  = solveEJML(a,b)

@@ -1,0 +1,20 @@
+
+
+import no.uib.cipr.matrix.*
+import no.uib.cipr.matrix.sparse.*
+
+
+nrows = 10; ncols = 10;
+d = new double[nrows][ncols]
+d[2][3] = 10
+d[4][4] = 44
+// create a sparse matrix from the double [][] array
+sd = new CCMatrix(d)
+
+// set an entry using putAt
+sd.putAt(2, 1, 21)
+
+// get entries using implicitly getAt
+elem2_1 = sd[2,1]
+elem2_2 = sd[2,2]
+

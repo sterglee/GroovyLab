@@ -1,0 +1,34 @@
+
+import java.io.FileWriter
+import java.nio.channels.*
+import java.nio.*
+import java.io.FileWriter
+
+fileName="test.dat"
+
+//out = new BufferedWriter(new FileWriter(fileName))
+
+insc = new FileInputStream(fileName)
+// get a channel from a file
+// a channel is an abstraction for disk files that lets you access operating system features as memory mapping
+channel = insc.getChannel()
+
+length = (int)channel.size()
+insc = channel.map(FileChannel.MapMode.READ_ONLY, 0,  length) as MappedByteBuffer
+
+
+       tic()
+       sm = 0.0
+       for (outer in 0..1000)
+       for (k in 0..length-1) {
+         x =  insc.get(k)
+         sm += x
+       }
+       tm = toc()   // 0.548
+       
+       tm
+       
+//tm= 2.207
+println("tm= "+tm)
+
+	   // Windows: 2.5 sec, Linux: 2.35 sec 

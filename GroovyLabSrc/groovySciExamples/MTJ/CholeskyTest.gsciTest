@@ -1,0 +1,45 @@
+
+import no.uib.cipr.matrix.*
+import static no.uib.cipr.matrix.Utilities.*
+
+kl = 2    // size of low band
+ku = 3  // size of up band
+n = 10  // size of matrix
+L = new LowerSPDBandMatrix(n, kl)
+no.uib.cipr.matrix.Utilities.bandPopulate(L, kl, 0)
+no.uib.cipr.matrix.Utilities.addDiagonal(L,1)
+  // spd(): returns true id the matrix is positive definite - therefore the loop exits only if positive definiteness is assured
+while (!no.uib.cipr.matrix.Utilities.spd(L))
+   no.uib.cipr.matrix.Utilities.addDiagonal(L, 1)
+
+   
+U = new no.uib.cipr.matrix.UpperSPDBandMatrix(n, ku)
+no.uib.cipr.matrix.Utilities.bandPopulate(U, 0, ku)
+no.uib.cipr.matrix.Utilities.addDiagonal(U,1)
+  // spd(): returns true id the matrix is positive definite - therefore the loop exits only if positive definiteness is assured
+while (!no.uib.cipr.matrix.Utilities.spd(U))
+   no.uib.cipr.matrix.Utilities.addDiagonal(U, 1)
+
+I = no.uib.cipr.matrix.Matrices.identity(n)
+
+// test lower band Cholesky
+
+n = L.numRows()
+// Constructor for BandCholesky(int n, int kd, boolean upper)
+// n: Matrix size, kd: number of matrix bands, upper: true for decomposing an upper symmetrical matrix, false for a lower symmetrical matrix
+c = new no.uib.cipr.matrix.BandCholesky(n, kl, false)
+
+// perform the Cholesky factorization
+c.factor(L.copy())
+
+lowL = c.getL()  // lower triangular of the Cholesky factorization
+
+
+result = c.solve(I)
+
+L.mul(result)
+J =  I.mult(L, new no.uib.cipr.matrix.DenseMatrix(n,n))
+
+
+
+

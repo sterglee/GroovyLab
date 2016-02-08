@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.8.2
+Created-By: 1.7.0_15-b03 (Oracle Corporation)
+Class-Path: lib/ApacheCommonMaths.jar lib/GroovyLabSrc lib/EJML022.jar
+  lib/GroovySciHelp.jar lib/JASYMCA.jar lib/JFreeChart.jar lib/JavaCom
+ piler.jar lib/MTJColtSGT.jar lib/NumericalRecipesNUMAL.jar lib/RSynta
+ xTextArea.jar lib/VISAD.jar lib/ant-1.8.4.jar lib/arpack_combo-0.1.ja
+ r lib/asm-4.0.jar lib/asm-analysis-4.0.jar lib/asm-commons-4.0.jar li
+ b/asm-tree-4.0.jar lib/asm-util-4.0.jar lib/autocomplete.jar lib/comm
+ ons-cli-1.2.jar lib/commons-logging-1.1.1.jar lib/csparsej.jar lib/f2
+ jutil.jar lib/fjbg.jar lib/forkjoin.jar lib/gluegen-rt-natives-linux-
+ amd64.jar lib/gluegen-rt-natives-linux-i586.jar lib/gluegen-rt-native
+ s-macosx-universal.jar lib/gluegen-rt-natives-solaris-amd64.jar lib/g
+ luegen-rt-natives-solaris-i586.jar lib/gluegen-rt-natives-windows-amd
+ 64.jar lib/gluegen-rt-natives-windows-i586.jar lib/groovy-all-2.1.5-i
+ ndy.jar lib/itext-2.1.5.jar lib/jSci.jar lib/jansi-1.6.jar lib/jblas-
+ 1.2.3.jar lib/jdk6Help.jar lib/jhall.jar lib/jline-1.0.jar lib/jogl-a
+ ll-natives-linux-amd64.jar lib/jogl-all-natives-linux-i586.jar lib/jo
+ gl-all-natives-macosx-universal.jar lib/jogl-all-natives-solaris-amd6
+ 4.jar lib/jogl-all-natives-solaris-i586.jar lib/jogl-all-natives-wind
+ ows-amd64.jar lib/jogl-all-natives-windows-i586.jar lib/jplasma.jar l
+ ib/jsearch.jar lib/jtransforms.jar lib/junit-4.10.jar lib/jzy3D.jar l
+ ib/netlib-java-0.9.3.jar lib/optimization.jar
+X-COMMENT: Main-Class will be added automatically by build
+Main-Class: gExec.gLab.gLab
+

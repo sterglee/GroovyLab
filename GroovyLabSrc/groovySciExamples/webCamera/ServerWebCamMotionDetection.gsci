@@ -1,0 +1,107 @@
+import java.awt.Dimension
+import java.awt.FlowLayout
+import javax.swing.JFrame
+import static javax.swing.JFrame.*
+import javax.swing.JLabel
+import javax.swing.SwingUtilities
+import com.github.sarxos.webcam.*
+
+import java.io.DataInputStream
+import java.io.DataOutputStream
+import java.io.InputStream
+import java.io.PrintStream
+import java.net.ServerSocket
+import java.net.Socket
+
+
+// the initialization thread for accepting a connection with the client
+class connectionInitThread implements Runnable {
+	public void run() {
+     DetectMotionServer.conn = DetectMotionServer.sc.accept()
+     DetectMotionServer.inStream = new DataInputStream(DetectMotionServer.conn.getInputStream())
+     DetectMotionServer.outStream = new DataOutputStream(DetectMotionServer.conn.getOutputStream())
+ 	}
+}
+
+
+
+//  a thread to sent the alarm over the internet connection using sockets
+   class AlarmThread implements Runnable {
+   	 public void run() {
+        if (DetectMotionServer.outStream != null) {
+           DetectMotionServer.outStream.writeDouble(DetectMotionServer.motionDetectedFlag) 
+           DetectMotionServer.outStream.flush()       
+      }
+     }
+   }
+
+
+class DetectMotionServer extends JFrame  implements   Runnable, WebcamMotionListener  {
+  static int	PortForAlarmServer = 8000  // port on which the alarm server waits
+  static double motionDetectedFlag = 111.111 // send this value to signal alarm to the client
+  static int   INTERVAL = 100  // ms
+
+  static ServerSocket  sc = new ServerSocket(PortForAlarmServer)    //  ServerSocket on which the motion detection alarm server waits
+  static Socket conn = null  // socket for accepting client connections
+  static DataInputStream  inStream = null
+  static DataOutputStream  outStream =  null
+  static Webcam   webcam = null
+
+   public void   run()  {
+                def  detector = new WebcamMotionDetector(webcam)
+                detector.setInterval(INTERVAL)
+                detector.addMotionListener(this)
+                detector.start()
+                        
+                }
+
+
+   def   motionDetect() {
+   
+                
+   setTitle("Motion Detector")
+   setLayout(new FlowLayout())
+
+   webcam = Webcam.getDefault()
+
+   
+   webcam.setViewSize(new Dimension(640, 480))
+
+   def  panel = new WebcamPanel(webcam)   // the panel for displaying the Web camera image stream
+
+   def updater = new Thread(new DetectMotionServer());
+   
+   updater.setDaemon(true)
+   updater.start()
+    
+   this.add(panel)
+
+   pack()
+   setVisible(true)
+  }
+
+  public void motionDetected( WebcamMotionEvent wme )  {
+                //println("Detected motion I, alarm turn on you have");
+  //java.awt.Toolkit.getDefaultToolkit().beep()
+   tone(400,1000)
+
+
+   def alarmThread = new Thread(new AlarmThread())
+   alarmThread.start()
+   
+
+    }
+        
+   }
+
+ 
+        
+initThreadObj = new Thread(new connectionInitThread())
+initThreadObj.start()
+
+ motionDetector = new DetectMotionServer()
+motionDetector.motionDetect()
+ 
+
+        
+              

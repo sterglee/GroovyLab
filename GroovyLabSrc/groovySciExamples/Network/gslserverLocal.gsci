@@ -1,0 +1,12 @@
+ 
+
+initLocalHostClient()
+
+N=500
+x = Rand(N,N)
+
+tic()
+evals = gslServerEig(x)
+tmGSLsocket = toc()
+
+

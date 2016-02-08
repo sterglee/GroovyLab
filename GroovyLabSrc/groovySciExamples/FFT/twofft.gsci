@@ -1,0 +1,13 @@
+
+N = 32
+N2 = N+N
+PER = 8
+data1 = new double[N]
+data2 = new double[N]
+fft1 = new double[N]
+fft2 = new double[N]
+
+for (int i=0; i<N; i++) {
+	data1[i] = floor(0.5+cos((i+1)*2.0*Math.PI/PER))
+	data2[i] = floor(0.5+cos((i+1)*2.0*Math.PI/PER))
+}

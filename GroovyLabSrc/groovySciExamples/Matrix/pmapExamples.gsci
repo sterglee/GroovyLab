@@ -1,0 +1,29 @@
+  
+
+
+
+ f = { a -> return (double)a*(double)a*(double)a}
+
+N = 3000
+x = rand(N, N)
+
+
+tic()
+y = x.pmap(f)
+ tmG = toc()
+
+
+ 
+@expandRunTime.CompileJava
+double f( double x) { return x*x*x; }
+
+@groovy.transform.CompileStatic
+class cf implements computeFunction {
+	double f(double x) { x*x*x }
+}
+co = new cf()
+
+
+tic()
+y2  = x.pmapf(co)
+tmj = toc()

@@ -1,0 +1,15 @@
+
+
+tic; var   sm = 0.0;   var cnt=0;  for (k <-1 to 100000)  { for ( l <-1 to 10)    {  sm = sm+k*l/2000;  cnt+=1;  };  sm = sin(0.12*sm); };  var tm=toc;
+// Scala time: 2.8
+
+tic; var   sm = 0.0;    var k=1; var l=1; var cnt=0;  while  (k <= 100000)  { l=1; while  ( l <= 10)  {   sm = sm+k*l/2000;  l+=1; cnt+=1; }; k+=1;  sm = sin(0.12*sm); };  var tm=toc
+// Scala time: 0.27
+
+
+@groovy.transform.CompileStatic
+tic();    sm=0.0; cnt=0;  for (k in 1..100000) { for (l in 1..10) { sm += (k*l)/2000; cnt++; }; sm = sin(0.12*sm);  }; tm = toc()
+// Groovy time: 2.474
+
+tic();   sm = 0.0;     k=1;  l=1;  cnt=0;  while  (k <= 100000)  { l=1; while  ( l <= 10)  {   sm += k*l/2000;  l++; cnt++; }; k++;  sm = sin(0.12*sm); };   tm=toc()
+// Groovy time: 2.58

@@ -1,0 +1,52 @@
+M = 2200
+ N = 2400
+ K = 2500
+  
+  
+  A = Ones(M*N)
+  lda = N
+  
+  B = Ones(N*K)
+  ldb = K
+  
+  C = Ones(M*K)
+  ldc = K
+  /* Compute C = A B */
+
+tic()
+  cblas_dgemm (CblasRowMajor, 
+               CblasNoTrans, CblasNoTrans, M, K, N,
+               1.0, A, lda, B, ldb, 0.0, C, ldc)
+tm=toc()   // time for CBLAS
+
+
+// compare with native GroovyLab matrix multiplication
+ Aj = Ones(M,N)
+ Bj = Ones(N, K)
+
+tic()
+Cj = Aj*Bj
+tmj = toc()
+
+Example 4 - Wavelet transformation
+
+ N = 256
+ nc = 20
+ data = new double[N]
+
+ 
+   w = gsl_wavelet_alloc (gsl_wavelet_daubechies(), 4)
+   work = gsl_wavelet_workspace_alloc (N)
+
+gg = new org.bytedeco.javacpp.gsl()
+
+
+for (k in 0..N-1) 
+    data[k]= sin(0.78*k)
+    
+    
+    figure(1); subplot(2,1,1); plot(data, "Original Data")
+    
+  gsl_wavelet_transform_forward (w, data, 1, N, work)
+ 
+ subplot(2,1,2); plot(data, "Wavelet Transformed Data")

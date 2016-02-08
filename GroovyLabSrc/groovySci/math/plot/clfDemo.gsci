@@ -1,0 +1,15 @@
+closeAll()
+N =  2**12  // a power of 2 integer
+t = vlinspace(0, 2, N)  // get N samples from 0 to 2 with linear sampling
+f1 = 2.23; f2 = 4.5;  f3 = 9.8  // some frequencies for signals
+sig = sin(f1*t)+4.5*cos(f2*t)+1.9*sin(f3*t)
+x1 = vrand(N)+sig  // add some noisy
+fftX1 = fft(x1)  // perform FFT
+subplot(2,1,1); plot(t, x1, "signal")
+subplot(2,1,2); plotfft( fftX1)
+ f2 = getDouble("Get new signal frequency", 8.0)
+sig = sin(f2*t)
+fft2sig = fft(sig)
+clf(2, 1, 2)
+subplot(2, 1, 2)
+plotfft(fft2sig)

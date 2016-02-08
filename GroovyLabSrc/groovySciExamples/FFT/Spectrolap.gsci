@@ -1,0 +1,19 @@
+
+closeAll()
+ dx =  0.001  // sampling interval
+fc = 0.5/dx  // Nyquist frequency
+t = inc(0, dx, 2*PI)  //  sample from  0 upto 2*PI with steps dx
+F1 = fc/2;  F2 = fc/8  // some frequencies for our synthetic signal
+x = sin(F1*t)+0.6*cos(t*F2)  // construct the signal
+
+// M : data segments will have length M and are processed in pairs of length 2*M with overlap
+M = 2 ** 9  // the length of the data segments
+mySpec =  new Spectolap(M)
+bartlett = new BartlettWin()
+mySpec.addlongdata(x.getv(), bartlett)
+psd = mySpec.spectrum()   // get the power spectrum
+freq = mySpec.frequencies()  // get the frequencies over which power is computed
+
+figure(1); 
+subplot(2,1,1); plot(t, x, Color.GREEN, "Signal")
+subplot(2,1,2); plot(freq, psd, Color.RED, "Power Spectral Density")

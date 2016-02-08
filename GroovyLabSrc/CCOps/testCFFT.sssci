@@ -1,0 +1,28 @@
+
+var  x = 0::0.001::500
+var N = x.length
+
+// illustrates FFT using both CCMath and Java
+
+var y = cos(0.23*x)+2.3*sin(0.78*x)+0.9*cos(0.45+5.6*x)
+
+figure(1); plot(y)
+
+var ccObj = scalaExec.Interpreter.NativeLibsObj.ccObj  // get the native object for CCMath based operations
+
+// prepare space for the real and imaginary FFT coefficients
+var reCoeff = new Array[Double](N)
+var imCoeff = new Array[Double](N)
+
+tic
+ccObj.ccfft(y, reCoeff, imCoeff, N)
+var tmc = toc
+
+tic
+var (jfftR, jfftI) = fft(y)
+var tmj = toc
+
+
+figure(2)
+subplot(2,1,1); plot(new Vec(reCoeff)(0::1000),"C FFT, time: "+tmc)
+subplot(2,1,2); plot(new Vec(jfftR)(0::1000),"Java FFT, time: "+tmj)

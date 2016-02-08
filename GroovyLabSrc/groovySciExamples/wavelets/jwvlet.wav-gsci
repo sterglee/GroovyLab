@@ -1,0 +1,39 @@
+
+
+
+fs = 2050
+dt = 1/fs 
+t =  inc(1, dt, 2)
+yl = t.length()
+if ( yl % 2 > 0) t=t[1..yl-1];
+
+y = sin(2*PI*30*t);
+y = y+0.1*rand(y.size()[0], y.size()[1]);
+
+// compute the analysis wavelet
+analWavelet = new JSci.maths.wavelet.daubechies2.Daubechies2();
+
+ // a matrix with one row can be accessed as double [] simply by specifying the 0th index
+ signal = new JSci.maths.wavelet.Signal(y[0]);  // represent the matrix as a Signal
+
+// transform
+signal.setFilter(analWavelet);  // set the analysis filter for this signal
+NLevels=1;
+sCoef = signal.fwt(NLevels); // for some level int
+myCoefs = sCoef.getCoefs();
+
+ERatios = new double[NLevels];
+for (k=1; k<NLevels; k++)
+  ERatios[k] = sCoef.energyRatio(k);
+
+
+sz = myCoefs[0].length;
+taxis = inc(1,1, sz);
+ coefSig = new Matrix(myCoefs[0]);
+figure(); plot(taxis, coefSig, "Wavelet Coefficients");
+recons = sCoef.rebuildSignal(analWavelet).evaluate(0);  
+// taxis[0] accesses the contents of a Matrix with one row as  a double [] 
+figure(); plot(taxis[0], recons, "Reconstructed Signal");         
+
+
+

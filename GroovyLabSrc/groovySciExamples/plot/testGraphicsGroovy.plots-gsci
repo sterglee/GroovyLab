@@ -1,0 +1,15 @@
+
+t = inc(-5, 0.01, 10);
+f1 = 0.34;
+f2 = 0.56;
+x = sin(f1*t)+5*cos(f2*t);
+plot(t,x, "t-x plot");
+
+y  = cos(x);
+figure();   plot(x,y, "x-y plot");
+
+sz=size(x);
+xn = x+rand(sz[0], sz[1]);
+fign = figure(); 
+plot(t, xn, "noisy signal");
+

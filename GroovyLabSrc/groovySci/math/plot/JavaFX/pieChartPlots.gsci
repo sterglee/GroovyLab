@@ -1,0 +1,12 @@
+
+
+ languages = ["Scala", "Java", "Groovy", "C/C++", "C#"] as String []
+
+speedIndex = [0.8, 0.82, 0.6, 0.95, 0.81] as double [] 
+
+setpieChartTitlefx("Speed indexes of some languages")
+
+setpieChartNamefx("Speed of languages")
+
+
+pieChartfx(languages, speedIndex)

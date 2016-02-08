@@ -1,0 +1,23 @@
+
+
+closeAll()  // closes all figure handles
+N = 2 ** 14  // the signal length is a power of two
+t = linspace(0, 1, N)  // take N linearly spaced samples in [0, 1]  
+x = sin(0.56*t)+ cos(2.3*t)+ 0.1*rand(1,N)   // signal plus noisy
+
+y = fft(x)  // perform FFT
+
+r = ifft(y)  // perform inverse FFT
+
+figure(1); subplot(2,1,1);
+plot(t, x, "Signal")  // plot the noisy signal
+
+// compute and plot the power spectrum
+rr = getReParts(r)
+im = getImParts(r)
+subplot(2,1,2); plot(rr*rr+im*im, "Power Spectrum")
+
+figure(2); 
+subplot(2,1,1); plot(x, "Original"); xlabel("x"); 
+subplot(2,1,2); plot(rr, "Reconstructed after inverse Fourier Transform"); xlabel("rr");  
+ 

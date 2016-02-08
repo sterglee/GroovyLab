@@ -1,0 +1,18 @@
+N=3001
+M=3111
+K = 3224
+
+x = Rand(N,M)
+y = Rand(M, K)
+
+// multithreaded JBLAS multiplication
+tic()
+xy  = x*y
+tm = toc()
+
+// serial multiplication
+tic()
+xys = groovySci.math.array.SerialMult.times(x, y) 
+tms=toc()
+
+max(max(abs(xy-xys))) //test result 

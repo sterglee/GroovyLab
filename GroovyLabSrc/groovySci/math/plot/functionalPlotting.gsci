@@ -1,0 +1,16 @@
+f = {x ->  sin(x*x) }
+
+closeAll()
+Npoints = 200
+figure(1)
+linePlotsOn()
+subplot(2, 1, 1)
+fplot(f, 0, 10 )
+xlabel("Fixed sampling functional ploting")
+subplot(2, 1, 2)
+res  = faplot(f, 0, 10, Npoints)
+xlabel("Adaptive sampling functional ploting")
+
+figure(2)
+linePlotsOn(); title("Functional plotting with adaptive sampling")
+plot(res)

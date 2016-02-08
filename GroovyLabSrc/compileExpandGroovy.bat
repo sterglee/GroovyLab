@@ -1,0 +1,1 @@
+groovyc -cp D:\NBProjects\GroovyLab\GroovyLabPr\dist\GroovyLab.jar;. D:\NBProjects\GroovyLab\GroovyLabSrc\expandRunTime\expandGroovy.groovy

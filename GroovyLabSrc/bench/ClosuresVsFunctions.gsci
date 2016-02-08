@@ -1,0 +1,49 @@
+
+/* 
+
+def f(x: Double) = x*x*x
+
+
+var N = 100000000
+var y = new Array[Double](N)
+
+tic
+var k=0
+while (k < N)
+ {
+  y(k)= f(k)
+  k+=1
+  }
+  
+ var tmScala = toc
+
+   
+  */
+  
+
+
+
+@expandRunTime.CompileJava
+double fj( double x) { return x*x*x; }
+
+
+ f = { a -> return (double)a*(double)a*(double)a}
+
+N = 100000000
+y = new double[N]
+
+tic()
+for (k in 0..N-1)
+  y[k]= f(k)
+ tmG = toc()
+
+ 
+tic()
+for (k in 0..N-1)
+  y[k]= fj(k)
+ tmJ = toc()
+
+// tmJ = 7.98, tmG = 19.15 
+ 
+   figure(2); plot(x,y,"test")
+   

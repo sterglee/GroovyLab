@@ -1,0 +1,16 @@
+
+ccObj =  gExec.Interpreter.NativeLibsObj.ccObj
+
+ 
+ M = 300
+ N = 300
+ d = Zeros(N)
+ MN=M*N
+ a = Rand(MN)
+ aa = a.clone()
+ u = Zeros(M*M)
+ v = Zeros(N*N)
+  tic()
+  ccObj.svduv(d, a, u, M, v, N)
+  tm = toc()
+   

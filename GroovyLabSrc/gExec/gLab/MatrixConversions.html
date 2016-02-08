@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1253">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 2.2  (Win32)">
+	<META NAME="CREATED" CONTENT="20130426;6143156">
+	<META NAME="CHANGED" CONTENT="20130721;4433701">
+	<STYLE TYPE="text/css">
+	<!--
+		@page { size: 21cm 29.7cm; margin: 2cm }
+		P { margin-bottom: 0.21cm }
+		PRE { font-family: "Times New Roman" }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="el-GR" DIR="LTR">
+<PRE><FONT SIZE=4 STYLE="font-size: 16pt"><B>Basic Matrix Assignment Tip</B></FONT>
+
+<FONT SIZE=4 STYLE="font-size: 16pt">The Java's notation for matrix assignment, e.g.</FONT>
+
+<FONT SIZE=4 STYLE="font-size: 16pt"><I>N=3</I></FONT>
+<FONT SIZE=4 STYLE="font-size: 16pt"><I>x = rand(N, N+6)</I></FONT>
+<FONT SIZE=4 STYLE="font-size: 16pt"><I>for (k in 0..N-1)</I></FONT>
+  <FONT SIZE=4 STYLE="font-size: 16pt"><I>x[k][k] = k    </I></FONT>
+
+<FONT SIZE=4 STYLE="font-size: 16pt"><I>is more efficient than e.g.</I></FONT>
+<FONT SIZE=4 STYLE="font-size: 16pt"><I>N=3</I></FONT>
+<FONT SIZE=4 STYLE="font-size: 16pt"><I>x = rand(N, N+6)</I></FONT>
+<FONT SIZE=4 STYLE="font-size: 16pt"><I>for (k in 0..N-1)</I></FONT>
+  <FONT SIZE=4 STYLE="font-size: 16pt"><I>x[k, k] = k    </I></FONT>
+
+
+<FONT SIZE=4 STYLE="font-size: 16pt"><I>// </I></FONT><FONT SIZE=4 STYLE="font-size: 16pt"><I><B>not x[k,k]=k</B></I></FONT>
+
+<FONT SIZE=4 STYLE="font-size: 16pt"><B>Converting GroovySci Matrix to other library formats</B></FONT>
+
+<FONT SIZE=4>You can convert <I>GroovySci Matrix</I> <SPAN STYLE="font-style: normal">and </SPAN><I>double[][] </I><SPAN STYLE="font-style: normal">array types to/from other library formats in order to work conveniently with the powerful Java libraries.</SPAN></FONT>
+<FONT SIZE=4>The available routines are:</FONT>
+
+    <FONT SIZE=4><I>// JBLAS conversion routines</I></FONT>
+
+    <FONT SIZE=4><I>// convert JBLAS DoubleMatrix to Matrix</I></FONT>
+    <FONT SIZE=4><I>public static Matrix JBLAS2Matrix(org.jblas.DoubleMatrix dm)    </I></FONT>
+
+  <FONT SIZE=4><I>// convert JBLAS DoubleMatrix to Double Array</I></FONT>
+    <FONT SIZE=4><I>public static double[][] JBLAS2DoubleArray(org.jblas.DoubleMatrix dm)     </I></FONT>
+    
+    <FONT SIZE=4><I>// convert Matrix to JBLAS DoubleMatrix </I></FONT>
+    <FONT SIZE=4><I>public static org.jblas.DoubleMatrix  Matrix2JBLAS(Matrix dm)     </I></FONT>
+  
+  <FONT SIZE=4><I>//// convert double [][] to JBLAS DoubleMatrix </I></FONT>
+    <FONT SIZE=4><I>public static org.jblas.DoubleMatrix  Matrix2JBLAS(double [][] dm)     </I></FONT>
+    
+    
+    <FONT SIZE=4><I>// EJML conversion routines</I></FONT>
+
+    <FONT SIZE=4><I>// convert EJML DenseMatrix64F to Matrix</I></FONT>
+    <FONT SIZE=4><I>public static Matrix EJML2Matrix(org.ejml.data.DenseMatrix64F  dm)     </I></FONT>
+
+ 
+  <FONT SIZE=4><I>// convert EJML  DenseMatrix64F to Double Array</I></FONT>
+    <FONT SIZE=4><I>public static double[][] EJML2DoubleArray(org.ejml.data.DenseMatrix64F  dm)     </I></FONT>
+    
+    <FONT SIZE=4><I>// convert Matrix to EJML DenseMatrix64F</I></FONT>
+    <FONT SIZE=4><I>public static org.ejml.data.DenseMatrix64F   Matrix2EJML(Matrix dm)     </I></FONT>
+
+  <FONT SIZE=4><I>//  convert double [][] to JBLAS DoubleMatrix </I></FONT>
+    <FONT SIZE=4><I>public static org.ejml.data.DenseMatrix64F  DoubleArray2EJML(double [][] dm)     </I></FONT>
+    
+    
+    <FONT SIZE=4><I>// MTJ conversion routines</I></FONT>
+    
+<FONT SIZE=4><I>// convert MTJ DenseMatrix to Matrix</I></FONT>
+    <FONT SIZE=4><I>public static Matrix MTJ2Matrix(no.uib.cipr.matrix.DenseMatrix   dm)     </I></FONT>
+
+  <FONT SIZE=4><I>// convert MTJ DenseMatrix to Double Array</I></FONT>
+    <FONT SIZE=4><I>public static double[][] MTJ2DoubleArray(no.uib.cipr.matrix.DenseMatrix  dm)     </I></FONT>
+    
+    <FONT SIZE=4><I>// convert Matrix to MTJ DenseMatrix</I></FONT>
+    <FONT SIZE=4><I>public static no.uib.cipr.matrix.DenseMatrix   Matrix2MTJ(Matrix dm)     </I></FONT>
+
+  
+  <FONT SIZE=4><I>// convert double [][] to MTJ DenseMatrix</I></FONT>
+    <FONT SIZE=4><I>public static no.uib.cipr.matrix.DenseMatrix  DoubleArray2MTJ(double [][] dm)     </I></FONT>
+    
+    
+    
+    <FONT SIZE=4><I>// Apache Commons conversion routines</I></FONT>
+
+    <FONT SIZE=4><I>// convert Apache Commons to Matrix</I></FONT>
+    <FONT SIZE=4><I>public static Matrix AC2Matrix(org.apache.commons.math3.linear.Array2DRowRealMatrix  dm)     </I></FONT>
+  
+  <FONT SIZE=4><I>// convert Apache Commons to Double Array</I></FONT>
+    <FONT SIZE=4><I>public static double[][] AC2DoubleArray(org.apache.commons.math3.linear.Array2DRowRealMatrix  dm)     </I></FONT>
+
+    <FONT SIZE=4><I>// convert Matrix to Apache Commons</I></FONT>
+    <FONT SIZE=4><I>public static org.apache.commons.math3.linear.Array2DRowRealMatrix   Matrix2AC(Matrix dm)     </I></FONT>
+  
+  <FONT SIZE=4><I>// convert double [][] to Apache Commons</I></FONT>
+    <FONT SIZE=4><I>public static org.apache.commons.math3.linear.Array2DRowRealMatrix  DoubleArray2AC(double [][] dm)     </I></FONT>
+    
+    
+    </PRE>
+</BODY>
+</HTML>

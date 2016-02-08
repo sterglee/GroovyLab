@@ -1,0 +1,21 @@
+
+filename = "C:\\matrixData\\t1"
+
+  // load the sparse matrix stored in triplet format
+ A =    loadSparse("L:\\NBProjects\\CSPARSEJ\\CSparseJ\\matrix\\t1")  
+   
+b = vrand(A.Nrows).getv()
+
+x = solve(A, b)   // solve the system with the CSparse method
+
+Ad = SparseToDoubleArray(A)  // convert to double array
+
+residual = Ad*x - b  // verify: should be near zero
+
+
+   // convert to an MTJ CCMatrix
+ ccms =    CSparseToCCMatrix(A)
+
+ xmtj = solve(ccms, b) // solve with the MTJ based iterative solver
+
+xmtj-x  // verify that the two solutions are equal

@@ -1,0 +1,62 @@
+jfigure(1)
+t = inc(0, 0.01, 10);   x = sin(0.23*t)
+lineSpecs = "."
+jplot(t,x, lineSpecs)
+jtitle("drawing multiple line styles")
+jhold(true)  // hold axis
+lineSpecs = ":r+"
+jplot(t, 0.1*cos(9.8*x), lineSpecs)
+// redefine the color of line 2
+jlineColor(2, Color.BLUE)
+
+jfigure(2)
+jsubplot(222)
+x11 = sin(8.23*t)
+jplot(t,x11)
+jhold(true)
+lineSpecs = ":g"
+jplot(t,sin(5*x11), lineSpecs)
+jsubplot(223)
+lineSpecs = ":r"
+jplot(t,x11, lineSpecs)
+
+
+// create a new figure and preform a plot at subplot 3,2,1
+ nf = jfigure()
+ jsubplot(3,2,1)
+ t2 = inc(0, 0.01, 10);  x2 = sin(3.23*t2)+2*cos(0.23*t2)
+ jplot(t2,x2, ".-")
+jsubplot(3,2,3)
+x3 = cos(2.3*t2)+9*sin(4.5*t2)
+jplot(t2, x3)
+jlineColor(1, Color.RED)
+jsubplot(3,2,5)
+x4 = cos(12.3*t2)+9*sin(2.5*t2)
+jplot(t2, x4+x3)
+jlineColor(1, Color.GREEN)
+jsubplot(3,2,6)
+jplot(t2, 6*x4+x3)
+jtitle("6*x4+x3")
+jlineColor(1, Color.BLUE)
+
+// now plot again at figure 2
+jfigure(2)  // concetrate on figure 2
+jhold(true);
+jsubplot(2, 2, 1)
+vr = rand(1, 2000)
+jplot(vr)
+jtitle("A Random Vector")
+td = t.getv()
+jsubplot(224)
+jplot(td, sin(1.34*td))
+jplot( td, sin(3.6*td))
+jtitle("Multiple Plots")
+
+
+
+// demonstrate PieDataChart
+
+c = new String[3];  c[0] = "Class1"; c[1] =  "Class2"; c[2] = "Class3"
+v = new double[3]; v[0]=5.7; v[1] = 9.8;  v[2] = 3.9
+pieChartName = "Test Pie Chart"
+myPie = jplot(pieChartName, c, v)

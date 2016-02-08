@@ -1,0 +1,156 @@
+
+tic();
+sm = 0.0d
+N=100;
+M=100;
+K=50;
+for (k in 1..N) {
+ for (m in 1..M) {
+  for (r in 1..K) {
+   sm += sin(k*m)/sin(r);
+   sm = sin(sm-cos(k*m));
+   }
+ }
+}
+tm = toc();
+// 0.671 P-Quad
+// 0.415 Solaris
+
+// Scala
+
+
+tic()
+var sm = 0.0
+var N=10;
+var M=100;
+var K=50;
+for (k<- 1 to N) {
+ for (m<- 1 to M) {
+  for (r <- 1 to K) {
+   sm += sin(k*m)/sin(r);
+   sm = sin(sm-cos(k*m));
+   }
+ }
+}
+var tm = toc();
+
+/* Matlab
+
+tic();
+sm = 0;
+N=100;
+M=100;
+K=50;
+for k = 1:N,
+ for m = 1:M,
+  for r = 1:K, 
+   sm = sm+ sin(k*m)/sin(r);
+   sm = sin(sm-cos(k*m));
+  end;
+ end;
+end;
+tm = toc();
+//    1.3024 P-Quad
+*/
+
+
+tic();
+sm = 0d;
+N=100;
+M=100;
+K=50;
+for (k in 1..N) {
+ for (m in 1..M) {
+  for (r in 1..K) {
+   sm += (k*m)/r;
+   if (sm > 1.0d) sm = 1.0d/sm;
+   }
+ }
+}
+tm = toc();
+// 3.7 P-Quad
+
+@groovy.transform.CompileStatic
+def compute() {
+tic();
+double sm = 0d;
+int N=100;
+int M=100;
+int K=50;
+for (int k=1; k<=N; k++) {
+ for (int m=1; m<=M; m++) {
+  for (int r=1; r<=K; r++) {
+   sm += k*m/r;
+   // if (sm > 1.0d) sm = 1.0d/sm;
+   sm = 1.0d/sm;
+   }
+ }
+}
+String tm = toc();
+println("tm = "+tm)
+}
+
+compute()
+
+// 4.2 sec P-Quad
+// 4.8 sec Solaris
+
+// Scala
+
+tic();
+var sm = 0.0
+var N=100;
+var M=100;
+var K=50;
+for (k <- 1 to N) {
+ for (m <- 1 to  M) {
+  for (r<- 1 to K) {
+   sm += k*m/r;
+   if (sm > 1.0d) sm = 1.0d/sm;
+   }
+ }
+}
+var tm = toc();
+
+/* Matlab
+tic();
+sm = 0.0;
+N=100;
+M=100;
+K=50;
+for k = 1:N,
+ for m = 1:M,
+  for r = 1:K, 
+   sm = sm+ k*m/r;
+   if sm > 1.0,  sm = 1/sm; end;
+  end;
+ end;
+end;
+tm = toc();
+// 0.8  sec
+
+*/
+
+// JavaSci
+double sm=0.0; 
+double tStart  = System.currentTimeMillis();  
+int cnt=0;
+
+int N=100;
+int M=100;
+int K=50;
+for (int k=1; k<=N; k++) {
+ for (int m=1; m<=M; m++) {
+  for (int r=1; r<=K; r++) {
+   sm += k*m/r;
+   if (sm > 1.0d) sm = 1.0d/sm;
+   }
+ }
+}
+
+  double tEnd = System.currentTimeMillis();
+  double JavaTime = (tEnd-tStart)/1000;
+  setVariable("JavaTime", JavaTime);
+  setVariable("JavaSum", sm);
+   // 0.015 sec P4-Quad
+

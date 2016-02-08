@@ -1,0 +1,43 @@
+package GSLOps;
+// gcc -lgsl  -lgslcblas -fPIC -fpermissive -I"/home/sterg/jdk1.8.0_20/include" -I"/home/sterg/jdk1.8.0_20/include/linux" -shared -o  libGSLOps.so  GSLOpsJNI.cpp 
+
+
+// interface to some native routines  using the CCMath library
+import java.io.File;
+
+
+public class GSLOps
+{
+    static
+    {
+           
+	String libName = "GSLOps.so";
+	   
+	try
+	{
+	   System.out.println("Trying to load CC library [" + libName + "] ...");
+	   File path = new File("");
+	   System.out.println("Current Path = " + path.getAbsolutePath());
+         	
+                        
+                     String libPath = path.getAbsolutePath() + File.separator + "lib"+File.separator + libName;
+
+                     System.load(libPath);
+	   System.out.println("Library loaded");
+	}
+	catch (Exception e)
+	{
+	   System.out.println("Error: " + e);
+	 }
+   }
+
+    	public    native double gslsfbesselJ0( double x);
+
+    
+    }
+	// multiplies two column indexed matrixes, a(n1 X n2), b (n2 X n3) returning result in c
+
+ 	
+	
+
+

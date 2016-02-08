@@ -1,0 +1,15 @@
+n=2200
+
+A=Rand(n,n)
+
+b =Rand(1, n)
+
+tic()
+x = ccsolv ( A, b[0])
+tmc = toc()
+
+tic()
+xj = solve(A, b[0])
+tmj = toc()
+
+x-xj

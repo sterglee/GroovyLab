@@ -1,0 +1,1 @@
+gcc -fPIC -I/usr/java/include -I/usr/java/include/solaris -shared -o solCCOps.so  CCOpsJNI.cpp
