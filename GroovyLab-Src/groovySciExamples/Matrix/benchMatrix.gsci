@@ -1,0 +1,25 @@
+
+
+// GroovySci matrix math bench
+start = System.currentTimeMillis();
+NLoop=1000;
+N=100;
+// m = rand(N, N);
+m = new double[N][N];
+reps=0;
+while (reps < NLoop-1) {
+ r=0;  
+while  (r <N-1) {
+   c=0;
+   while (c < N-1) {
+      m[r][c] = NLoop*r*c;
+      c++;
+     }
+   r++;
+  }
+reps++;
+}
+
+end = System.currentTimeMillis();
+delay  = end-start;
+JOptionPane.showMessageDialog(null, "Delay = "+delay);

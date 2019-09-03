@@ -1,0 +1,70 @@
+
+M=4000
+x=rand(M,M)
+tic()
+for (r in 0..M-1)
+  for (c in 0..M-1)
+    x[r,c]=8*x[r,c]
+  tm=toc()  // 1.828 sec
+
+
+ M=4000
+ x=Rand(M,M)
+tic()
+for (r in 0..M-1)
+  for (c in 0..M-1)
+    x[r][c]=8*x[r][c]
+  tm2d=toc()  // 1.157 
+
+  /*
+   var M=4000
+   var x = rand(M,M)
+   tic
+   for (r<-0 until M)
+    for (c<-0 until M)
+    x(r, c)=8*x(r,c)
+   var tm=toc 
+
+   
+   var M=4000
+   var x = rand(M,M)
+   tic
+   var r = 0
+   while  (r< M) {
+    var c = 0
+    while (c< M) {
+    x(r, c)=8*x(r,c)
+    c += 1
+    }
+    r += 1
+    }  // tm = 0.21
+    
+   var tm=toc 
+   
+   */
+
+  
+N=100000; dx=0.01; l=0.0; up=100
+tic()
+for (k in 0..N)
+ x = (l..up).step(dx)
+ tmGroovy=toc()
+
+ // tmGroovy = 2.11
+
+
+ /* Scala 
+  
+var N=100000
+tic()
+var k=0
+var dx=0.01
+var low=0.0; var up = 100;
+var x = low::dx::up
+while (k<=N) {
+ x = low::dx::up
+ k+=1
+ }
+ 
+ var tmScala=toc()  // tmScala=2.47
+  */

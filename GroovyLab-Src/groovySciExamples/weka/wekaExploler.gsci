@@ -1,0 +1,11 @@
+  // !! requires weka.jar toolbox
+       // starts the WEKA exploler
+       weka.gui.explorer.Explorer   WEKAExplorer = new weka.gui.explorer.Explorer();
+        JFrame wekaFrame = new JFrame("WEKA");
+        wekaFrame.setSize(900, 800);
+        wekaFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        WEKAExplorer.setLocation(30, 30);
+        WEKAExplorer.setSize(500, 500);
+        WEKAExplorer.setVisible(true);
+        wekaFrame.add(WEKAExplorer);
+        wekaFrame.setVisible(true);

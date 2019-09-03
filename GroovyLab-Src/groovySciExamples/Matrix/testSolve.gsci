@@ -1,0 +1,30 @@
+ N=1200
+ A  = Rand(N, N)  // create double [][]
+ B = Rand(N,1) 
+     
+// using JAMA's LU
+tic()
+lux = LU_solve(A, B)
+tmLU = toc()
+A*lux-B  // verify that indeed the correction solution is found
+
+// using JAMA's QR
+tic()
+qrx = QR_solve(A, B)
+tmQR = toc() 
+A*qrx-B  // verify that indeed the correction solution is found
+
+// the default of JAMA's solver, which uses LUDecomposition for square matrices
+// and QRDecomposition otherwise
+tic()
+solvex = solve(A, B)
+tmSolve = toc()
+A*solvex-B
+
+// native BLAS      
+tic()
+jblassolvex = jblas_solve(A, B)
+tmjblassolve = toc()
+      
+
+      

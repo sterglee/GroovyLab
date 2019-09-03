@@ -1,0 +1,19 @@
+
+// the MATLAB expression to evaluate
+mexpr = """
+fv = @(t,x) [ 2*x(1)-0.001 - 0.001*x(1)*x(2); -10*x(2)+0.002*x(1)*x(2)];
+initx = [5000 100]';
+options = odeset('RelTol', acc);
+[t x] = ode23(fv, [0 simtime], initx, options);
+"""
+
+acc = getDouble("accuracy", 0.001)
+simtime = getDouble("enter runtime", 30.0)
+initMatlabConnection()
+meval(mexpr, ["acc", "simtime"], ["t", "x"])
+
+
+xm = new Matrix(x)
+xm = t(xm)
+
+plot(xm)

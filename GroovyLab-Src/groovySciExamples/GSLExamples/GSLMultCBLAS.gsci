@@ -1,0 +1,38 @@
+import org.bytedeco.javacpp.DoublePointer
+
+// dimensions of matrices
+ M = 2000
+ N = 1900
+ K = 2100
+
+// create sample arrays of 1s as matrices
+  a = Ones(M*N)
+  xa = new DoublePointer(a)
+
+   b = Ones(N*K)
+   xb = new DoublePointer(b)
+
+   c = Ones(M*K)
+   xc = new DoublePointer(c)
+  
+  
+   A = gsl_matrix_view_array(xa, M, N)
+   B = gsl_matrix_view_array(xb, N, K)
+   C = gsl_matrix_view_array(xc, M, K)
+
+  /* Compute C = A B */
+
+  tic() 
+  gsl_blas_dgemm (CblasNoTrans, CblasNoTrans,
+                  1.0, A.matrix(), B.matrix(),
+                  0.0, C.matrix())
+   tmGLS = toc()                
+      
+      // get now the matrix
+      
+    Cs = new Matrix(M, K)
+   
+      for (rows  in 0..M-1 )
+       for (cols  in  0..  K-1)
+          Cs[rows, cols] =  C.matrix().data().get(rows*K+cols)
+          

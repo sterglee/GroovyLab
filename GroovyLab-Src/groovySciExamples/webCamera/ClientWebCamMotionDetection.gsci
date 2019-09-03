@@ -1,0 +1,27 @@
+import java.io.*
+import java.net.Socket
+
+
+class clientThread implements Runnable {
+ def alarmServerIP = "195.130.94.125"
+ def alarmServerPort = 8000
+ double motionDetectedFlag = 111.111
+
+ def clientSocket = new Socket(alarmServerIP, alarmServerPort)
+
+ def inStream = new DataInputStream( clientSocket.getInputStream())
+
+	public void run() {
+		while (true)
+		  {
+		  	def flagMotionDetected = inStream.readDouble()
+		  	if (flagMotionDetected == motionDetectedFlag)
+		  	  println("ALARM !! ")
+		  }
+	}
+}
+
+cl = new Thread(new clientThread())
+cl.start()
+
+ 

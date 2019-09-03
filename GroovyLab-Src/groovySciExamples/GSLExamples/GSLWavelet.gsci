@@ -1,0 +1,20 @@
+ N = 256
+ nc = 20
+ data = new double[N]
+
+ 
+   w = gsl_wavelet_alloc (gsl_wavelet_daubechies(), 4)
+   work = gsl_wavelet_workspace_alloc (N)
+
+gg = new org.bytedeco.javacpp.gsl()
+
+
+for (k in 0..N-1) 
+    data[k]= sin(0.78*k)
+    
+    
+    figure(1); subplot(2,1,1); plot(data, "Original Data")
+    
+  gsl_wavelet_transform_forward (w, data, 1, N, work)
+ 
+ subplot(2,1,2); plot(data, "Wavelet Transformed Data")

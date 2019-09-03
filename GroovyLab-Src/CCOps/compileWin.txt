@@ -1,0 +1,1 @@
+cl -O2 -I"C:\Java\jdk8\include" -I"C:\Java\jdk8\include\win32" -I"C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include"  -LD  CCOpsJNI.cpp pthreadVC2.lib /FeCCOps.dll

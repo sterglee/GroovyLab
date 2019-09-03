@@ -1,0 +1,20 @@
+
+initLocalHostClient()
+
+N=1000
+x = rand(N,N)
+
+tic()
+evals = gslServerEig(x)
+tmGSLsocket = toc()
+
+tic()
+evaljava = eig(x)
+tmJava=toc()  // 1.92
+
+tic()
+evalGSLJNI =y.gsleig()
+tmGSLJNI = toc()  // 1.72 sec
+
+
+ 

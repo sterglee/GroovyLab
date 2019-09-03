@@ -1,0 +1,19 @@
+
+
+var N=20
+var A = rand(N, N)
+var b = Rand(N)
+
+// solve a system using C
+// is about 1.6 times faster than Java
+var x = ccsolv(A, b)
+
+var shouldBeZero = A*x-b
+
+
+// solution for symmetric positive definite is about two times faster than general solution
+var AA = A*(A~)  // create a symmetric positive definite matrix
+// solve a system using C
+var xps = ccsolvps(AA, b)
+
+var shouldBeZero_ps = AA*xps-b

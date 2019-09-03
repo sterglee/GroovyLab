@@ -1,0 +1,622 @@
+t=inc(0, 0.01, 90); plot(sin(0.3*t))
+
+t=inc(0, 0.01, 90); plot(sin(0.3*t))
+
+
+// to run this demo copy and paste the code 
+
+t=inc(0, 0.01, 50);  // create a time axis
+freq = 0.12; 
+x=sin(freq*t);  // a simple sinusoid
+y = 3*cos(0.4*x)+0.12*sin(0.7*x);
+
+z = dot(y, 0.01*t);  // dot product
+h = dot(z, sin(0.3*x));  //  if the operator * cannot perform matrix multiplication it tries to perform dot product
+
+figure();  plot(t,x, "t -  sin(t)");
+
+figNew = figure();  subplot(2,1,1);  plot(t, z, "t - t*x : A sine supeimposed on a linear inreasing curve");
+
+subplot(2,1,2);  plot(z, h, "y .* 0.01*t, z .* sin(0.3*x)");
+
+
+figure(); hold("off"); subplot(2,1,1);  hold("on");  plot(x,y, Color.RED); plot(x,z, Color.BLUE); 
+subplot(2,1,2);   hold("off"); plot(x,y, Color.RED); plot(x,z, Color.BLUE);  
+ title("Demo for hold(\"on\"): up subplot,  hold(\"off\"), bottom subplot");
+
+
+fig3d = figure3d(); subplot3d(2,1,1); plot(y, z, h, " y - z - h");
+subplot3d(2,1,2); plot(cos(y), sin(0.2*z), h, " cos(y) - sin(0.2*z) - h");
+
+
+figure(); subplot(2,3,4);
+ plot2d_line(t, y, "test");
+ plot2d_line(x,y, "x-y");
+subplot(2,3,1); plot(h, z); subplot(2,3,2); plot(h, z*y);
+subplot(2,3,3); plot(y, h);
+
+N = x.size()[1];
+a = rand(3, N);
+
+figure();
+subplot(2,1,1); plot2d_line(t, a[1], "a[1]");
+subplot(2,1,2); plot2d_line(t, a[2], "a[2]");
+
+figure3d();
+subplot3d(3,1,1); plot3d_line(t, a[1], a[2], "a[1]-a[2]");
+subplot3d(3,1,2); plot3d_line(t, x, y, "x-y");
+subplot3d(3,1,3); plot(x, y, z*a[1],  "complex sines multiplied by noise");
+
+sample = rand(3, 1000);
+slices_x = 6; slices_y = 6; slices_z = 6; name="cloud";
+figure(); plot3d_cloud( sample, slices_x, slices_y, slices_z,  name);
+
+
+
+
+// to run this demo copy and paste the code 
+
+t=inc(0, 0.01, 50);  // create a time axis
+freq = 0.12; 
+x=sin(freq*t);  // a simple sinusoid
+y = 3*cos(0.4*x)+0.12*sin(0.7*x);
+
+z = dot(y, 0.01*t);  // dot product
+h = dot(z, sin(0.3*x));  //  if the operator * cannot perform matrix multiplication it tries to perform dot product
+
+figure();  plot(t,x, "t -  sin(t)");
+
+figNew = figure();  subplot(2,1,1);  plot(t, z, "t - t*x : A sine supeimposed on a linear inreasing curve");
+
+subplot(2,1,2);  plot(z, h, "y .* 0.01*t, z .* sin(0.3*x)");
+
+
+figure(); hold("off"); subplot(2,1,1);  hold("on");  plot(x,y, Color.RED); plot(x,z, Color.BLUE); 
+subplot(2,1,2);   hold("off"); plot(x,y, Color.RED); plot(x,z, Color.BLUE);  
+ title("Demo for hold(\"on\"): up subplot,  hold(\"off\"), bottom subplot");
+
+
+fig3d = figure3d(); subplot3d(2,1,1); plot(y, z, h, " y - z - h");
+subplot3d(2,1,2); plot(cos(y), sin(0.2*z), h, " cos(y) - sin(0.2*z) - h");
+
+
+figure(); subplot(2,3,4);
+ plot2d_line(t, y, "test");
+ plot2d_line(x,y, "x-y");
+subplot(2,3,1); plot(h, z); subplot(2,3,2); plot(h, z*y);
+subplot(2,3,3); plot(y, h);
+
+N = x.size()[1];
+a = rand(3, N);
+
+figure();
+subplot(2,1,1); plot2d_line(t, a[1], "a[1]");
+subplot(2,1,2); plot2d_line(t, a[2], "a[2]");
+
+figure3d();
+subplot3d(3,1,1); plot3d_line(t, a[1], a[2], "a[1]-a[2]");
+subplot3d(3,1,2); plot3d_line(t, x, y, "x-y");
+subplot3d(3,1,3); plot(x, y, z*a[1],  "complex sines multiplied by noise");
+
+sample = rand(3, 1000);
+slices_x = 6; slices_y = 6; slices_z = 6; name="cloud";
+figure(); plot3d_cloud( sample, slices_x, slices_y, slices_z,  name);
+
+
+
+
+import wavelets.DaubW;
+import static groovySci.math.array.Matrix.*
+import static groovySci.math.plot.Plot.*
+import java.awt.*;
+import javax.swing.*;
+import groovySci.math.plot.*;
+import groovySci.math.plot.render.*;
+
+
+N=2000;
+freq=0.12; a = new double[1][N];
+
+for (k in 0..N-1) {
+  a[0][k] = Math.sin(freq*k);
+}
+
+   DaubW  daubWavelet = new DaubW();
+     
+    daubWavelet.daubTrans(a[0]);
+ 
+Plot2DPanel plotP = new Plot2DPanel();
+NPoints = a[0].length;
+ XYZ = new double[NPoints][2];
+j=0;
+while (j < NPoints)  {
+    XYZ[j][0] = j; 
+    XYZ[j][1] = a[0][j];  
+    j++;
+ }
+  
+ plotP.addLinePlot("Daubechies Wavelet" , XYZ);
+
+ plotP.setLegendOrientation(PlotPanel.SOUTH);
+ new FrameView(plotP).setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+ 
+				
+
+
+
+
+
+import static groovySci.math.array.BasicDSP.*; 
+import groovySci.math.array.Matrix; 
+import static groovySci.math.array.Matrix.*; 
+import static groovySci.math.plot.plot.*;     
+import static java.lang.Math.*;     
+ 
+
+N=2000;
+freq=0.12; 
+
+dt = 1;
+t = inc(1,dt, N);
+x = sin(freq*t);
+
+figure(1); plot(t,x);
+
+
+
+// to run this demo copy and paste the code 
+
+t=inc(0, 0.01, 50);  // create a time axis
+freq = 0.12; 
+x=sin(freq*t);  // a simple sinusoid
+y = 3*cos(0.4*x)+0.12*sin(0.7*x);
+
+z = dot(y, 0.01*t);  // dot product
+h = dot(z, sin(0.3*x));  //  if the operator * cannot perform matrix multiplication it tries to perform dot product
+
+figure();  plot(t,x, "t -  sin(t)");
+
+figNew = figure();  subplot(2,1,1);  plot(t, z, "t - t*x : A sine supeimposed on a linear inreasing curve");
+
+subplot(2,1,2);  plot(z, h, "y .* 0.01*t, z .* sin(0.3*x)");
+
+
+figure(); hold("off"); subplot(2,1,1);  hold("on");  plot(x,y, Color.RED); plot(x,z, Color.BLUE); 
+subplot(2,1,2);   hold("off"); plot(x,y, Color.RED); plot(x,z, Color.BLUE);  
+ title("Demo for hold(\"on\"): up subplot,  hold(\"off\"), bottom subplot");
+
+
+fig3d = figure3d(); subplot3d(2,1,1); plot(y, z, h, " y - z - h");
+subplot3d(2,1,2); plot(cos(y), sin(0.2*z), h, " cos(y) - sin(0.2*z) - h");
+
+
+figure(); subplot(2,3,4);
+ plot2d_line(t, y, "test");
+ plot2d_line(x,y, "x-y");
+subplot(2,3,1); plot(h, z); subplot(2,3,2); plot(h, z*y);
+subplot(2,3,3); plot(y, h);
+
+N = x.size()[1];
+a = rand(3, N);
+
+figure();
+subplot(2,1,1); plot2d_line(t, a[1], "a[1]");
+subplot(2,1,2); plot2d_line(t, a[2], "a[2]");
+
+figure3d();
+subplot3d(3,1,1); plot3d_line(t, a[1], a[2], "a[1]-a[2]");
+subplot3d(3,1,2); plot3d_line(t, x, y, "x-y");
+subplot3d(3,1,3); plot(x, y, z*a[1],  "complex sines multiplied by noise");
+
+sample = rand(3, 1000);
+slices_x = 6; slices_y = 6; slices_z = 6; name="cloud";
+figure(); plot3d_cloud( sample, slices_x, slices_y, slices_z,  name);
+
+
+
+t=inc(0, 0.01, 10); plot(sin(0.34*t))
+
+t=inc(0,0.01, 10); plot(sin(0.3*t))
+
+
+
+t=inc(0,0.01, 10); plot(sin(0.3*t))
+
+
+// to run this demo copy and paste the code 
+
+t=inc(0, 0.01, 50);  // create a time axis
+freq = 0.12; 
+x=sin(freq*t);  // a simple sinusoid
+y = 3*cos(0.4*x)+0.12*sin(0.7*x);
+
+z = dot(y, 0.01*t);  // dot product
+h = dot(z, sin(0.3*x));  //  if the operator * cannot perform matrix multiplication it tries to perform dot product
+
+figure();  plot(t,x, "t -  sin(t)");
+
+figNew = figure();  subplot(2,1,1);  plot(t, z, "t - t*x : A sine supeimposed on a linear inreasing curve");
+
+subplot(2,1,2);  plot(z, h, "y .* 0.01*t, z .* sin(0.3*x)");
+
+
+figure(); hold("off"); subplot(2,1,1);  hold("on");  plot(x,y, Color.RED); plot(x,z, Color.BLUE); 
+subplot(2,1,2);   hold("off"); plot(x,y, Color.RED); plot(x,z, Color.BLUE);  
+ title("Demo for hold(\"on\"): up subplot,  hold(\"off\"), bottom subplot");
+
+
+fig3d = figure3d(); subplot3d(2,1,1); plot(y, z, h, " y - z - h");
+subplot3d(2,1,2); plot(cos(y), sin(0.2*z), h, " cos(y) - sin(0.2*z) - h");
+
+
+figure(); subplot(2,3,4);
+ plot2d_line(t, y, "test");
+ plot2d_line(x,y, "x-y");
+subplot(2,3,1); plot(h, z); subplot(2,3,2); plot(h, z*y);
+subplot(2,3,3); plot(y, h);
+
+N = x.size()[1];
+a = rand(3, N);
+
+figure();
+subplot(2,1,1); plot2d_line(t, a[1], "a[1]");
+subplot(2,1,2); plot2d_line(t, a[2], "a[2]");
+
+figure3d();
+subplot3d(3,1,1); plot3d_line(t, a[1], a[2], "a[1]-a[2]");
+subplot3d(3,1,2); plot3d_line(t, x, y, "x-y");
+subplot3d(3,1,3); plot(x, y, z*a[1],  "complex sines multiplied by noise");
+
+sample = rand(3, 1000);
+slices_x = 6; slices_y = 6; slices_z = 6; name="cloud";
+figure(); plot3d_cloud( sample, slices_x, slices_y, slices_z,  name);
+
+
+
+a[9][8]=88
+
+a
+
+
+//   uses  the rke()  of the NUMAL library
+//   the rke() routine solves an initial value problem for a system of first order ordinary differential 
+//   equations dy/dx = f(x,y), from x = x0 to x = xe where y(x0) = y0, by means of a 5-th
+//   order Runge-Kutta method. The system is assumed to be nonstiff.
+
+import numal.*;
+
+import java.util.Vector;
+
+import groovySci.math.array.*; 
+import static groovySci.math.array.Matrix.*;
+import static groovySci.math.plot.plot.*;
+
+             
+n = 3;   // the number of equations of the system
+x = new double[1];   // entry:   x[0] is the initial value of the independent variable  
+xe = new double[1];   //  entry:  xe[0] is the final value of the independent variable 
+y = new double[n+1];   // entry: the dependent variable, the initial values at x = x0
+data = new double[7];   // in array data one should give:
+                                        //     data[1]:   the relative tolerance
+                                        //      data[2]:  the absolute tolerance
+                                        // after each step data[3:6] contains:
+                                        //      data[3]:  the steplength used for the last step
+                                        //      data[4]:  the number of integration steps performed
+                                        //      data[5]:  the number of integration steps rejected
+                                        //      data[6]:  the number of integration steps skipped
+                                        // if upon completion of rke data[6] > 0, then results should be considered most criticallly
+
+fi = true;                        // if fi is true then the integration starts at x0 with a trial step xe-x0; 
+                                        // if fi is false then the integration is continued with a step length data[3]* sign(xe-x0)
+
+
+// a Java class that implements the AP_rke_methods interface should be specified
+// The AP_rke_methods interface requires the implementation of two procedures:
+//    void der(int n, double t, double v[])
+//              this procedure performs an evaluation of the right-hand side of the syste4m with dependent variable v[1:n] and
+//              and independent variable t; upon completion of der the right-hand side should be overwritten on v[1:n]
+//    void out(int n, double x[], double xe[], double y[], double data[])
+//              after each integration step performed, out can be used to obtain information from the solution process,
+//              e.g., the values of x, y[1:n], and data[3:6]; out can also be used to update data, but x and xe remain unchanged
+
+
+       
+y[1] = 0.04840037112900297; 
+y[2] = 0.13548442252861992; 
+y[3] = 0.8792018004421086; 
+
+      xstart = 0; xend = 100;
+      x[0] = xstart;
+      xe[0] = xend;
+       
+      data[1]=data[2]=1.0e-6;
+
+      xOut = new Vector();
+      yOut = new Vector();
+      long start = System.currentTimeMillis();
+ 
+javaClassName = "jExec.Functions.Chaotic.Lorenz";
+AP_rke_methods  invocationObject = (AP_rke_methods) Class.forName(javaClassName).newInstance();
+
+       Analytic_problems.rke(x, xe, n, y, invocationObject,  data, fi,  xOut, yOut);
+
+      end =  System.currentTimeMillis();
+      runTime = end-start;
+
+      lorenzOut = new Matrix(n, yOut);
+
+     title = "Lorenz system, method Runge-Kutta (rke()),  ntegratin from "+xstart+", to tEnd= "+xend+", runTime = "+runTime;
+     figure3d(1); plot3(lorenzOut, title);
+
+
+
+
+t=inc(0, 0.01, 10); plot(t, sin(0.4*t));
+
+
+// to run this demo copy and paste the code 
+
+N=1000;
+xy = new double[2][N];
+f=0.02;
+dt=0.01;
+for (k in 0..N-1) {
+  xy[0][k] = k*dt;  xy[1][k] = sin(f*k);
+  }
+
+effects_multiplot2d_line(xy, 2, 2);
+
+
+XY = new Matrix(xy); 
+
+Plot(XY);
+
+Subplot(2,1,1) ; Plot(XY);
+Subplot(2,1,1); Plot(XY); 
+Figure(2); Plot(sin(XY))
+//effects_plot2d_line(xy);
+
+xym = rand(2, 1000);
+plot(xym);
+
+
+import javax.swing.*;
+ 
+import org.math.plot.*;
+ 
+public class LinePlotExample {
+        public static void main(String[] args) {
+ 
+                // define your data
+                double[] x = { 1, 2, 3, 4, 5, 6 };
+                double[] y = { 45, 89, 6, 32, 63, 12 };
+ 
+                // create your PlotPanel (you can use it as a JPanel)
+                Plot2DPanel plot = new Plot2DPanel();
+ 
+                // define the legend position
+                plot.addLegend("SOUTH");
+ 
+                // add a line plot to the PlotPanel
+                plot.addLinePlot("my plot", x, y);
+ 
+                // put the PlotPanel in a JFrame like a JPanel
+                JFrame frame = new JFrame("a plot panel");
+                frame.setSize(600, 600);
+                frame.setContentPane(plot);
+                frame.setVisible(true);
+ 
+        }
+}
+
+
+import org.math.plot.*;
+ 
+import static java.lang.Math.*;
+ 
+import static org.math.array.DoubleArray.*;
+ 
+public class GridPlotsExample {
+        public static void main(String[] args) {
+ 
+                // define your data
+                double[] x = increment(0.0, 0.1, 1.0); // x = 0.0:0.1:1.0
+                double[] y = increment(0.0, 0.05, 1.0);// y = 0.0:0.05:1.0
+                double[][] z1 = f1(x, y);
+                double[][] z2 = f2(x, y);
+ 
+                // create your PlotPanel (you can use it as a JPanel) with a legend at SOUTH
+                Plot3DPanel plot = new Plot3DPanel("SOUTH");
+ 
+                // add grid plot to the PlotPanel
+                plot.addGridPlot("z=cos(PI*x)*sin(PI*y)", x, y, z1);
+                plot.addGridPlot("z=sin(PI*x)*cos(PI*y)", x, y, z2);
+ 
+                // put the PlotPanel in a JFrame like a JPanel
+                JFrame frame = new JFrame("a plot panel");
+                frame.setSize(600, 600);
+                frame.setContentPane(plot);
+                frame.setVisible(true);
+ 
+        }
+ 
+        // function definition: z=cos(PI*x)*sin(PI*y)
+        public static double f1(double x, double y) {
+                double z = cos(x * PI) * sin(y * PI);
+                return z;
+        }
+ 
+        // grid version of the function
+        public static double[][] f1(double[] x, double[] y) {
+                double[][] z = new double[y.length][x.length];
+                for (int i = 0; i < x.length; i++)
+                        for (int j = 0; j < y.length; j++)
+                                z[j][i] = f1(x[i], y[j]);
+                return z;
+        }
+ 
+        // another function definition: z=sin(PI*x)*cos(PI*y)
+        public static double f2(double x, double y) {
+                double z = sin(x * PI) * cos(y * PI);
+                return z;
+        }
+ 
+        // grid version of the function
+        public static double[][] f2(double[] x, double[] y) {
+                double[][] z = new double[y.length][x.length];
+                for (int i = 0; i < x.length; i++)
+                        for (int j = 0; j < y.length; j++)
+                                z[j][i] = f2(x[i], y[j]);
+                return z;
+        }
+
+
+
+
+import javax.swing.*;
+ 
+import org.math.plot.*;
+ 
+import static org.math.array.StatisticSample.*;
+ 
+public class HistogramExample {
+        public static void main(String[] args) {
+ 
+                // define your data
+                double[] x = randomLogNormal(1000, 0, 0.5); // 1000 random numbers from a log normal statistical law
+ 
+                // create your PlotPanel (you can use it as a JPanel)
+                Plot2DPanel plot = new Plot2DPanel();
+ 
+                // add the histogram (50 slices) of x to the PlotPanel
+                plot.addHistogramPlot("Log Normal population", x, 50);
+ 
+                // put the PlotPanel in a JFrame like a JPanel
+                JFrame frame = new JFrame("a plot panel");
+                frame.setSize(600, 600);
+                frame.setContentPane(plot);
+                frame.setVisible(true);
+ 
+        }
+}
+
+
+
+
+
+
+
+
+
+// to run this demo copy and paste the code 
+
+t=inc(0, 0.01, 50);  // create a time axis
+freq = 0.12; 
+x=sin(freq*t);  // a simple sinusoid
+y = 3*cos(0.4*x)+0.12*sin(0.7*x);
+
+z = dot(y, 0.01*t);  // dot product
+h = dot(z, sin(0.3*x));  //  if the operator * cannot perform matrix multiplication it tries to perform dot product
+
+figure();  plot(t,x, "t -  sin(t)");
+
+figNew = figure();  subplot(2,1,1);  plot(t, z, "t - t*x : A sine supeimposed on a linear inreasing curve");
+
+subplot(2,1,2);  plot(z, h, "y .* 0.01*t, z .* sin(0.3*x)");
+
+
+figure(); hold("off"); subplot(2,1,1);  hold("on");  plot(x,y, Color.RED); plot(x,z, Color.BLUE); 
+subplot(2,1,2);   hold("off"); plot(x,y, Color.RED); plot(x,z, Color.BLUE);  
+ title("Demo for hold(\"on\"): up subplot,  hold(\"off\"), bottom subplot");
+
+
+fig3d = figure3d(); subplot3d(2,1,1); plot(y, z, h, " y - z - h");
+subplot3d(2,1,2); plot(cos(y), sin(0.2*z), h, " cos(y) - sin(0.2*z) - h");
+
+
+figure(); subplot(2,3,4);
+ plot2d_line(t, y, "test");
+ plot2d_line(x,y, "x-y");
+subplot(2,3,1); plot(h, z); subplot(2,3,2); plot(h, z*y);
+subplot(2,3,3); plot(y, h);
+
+N = x.size()[1];
+a = rand(3, N);
+
+figure();
+subplot(2,1,1); plot2d_line(t, a[1], "a[1]");
+subplot(2,1,2); plot2d_line(t, a[2], "a[2]");
+
+figure3d();
+subplot3d(3,1,1); plot3d_line(t, a[1], a[2], "a[1]-a[2]");
+subplot3d(3,1,2); plot3d_line(t, x, y, "x-y");
+subplot3d(3,1,3); plot(x, y, z*a[1],  "complex sines multiplied by noise");
+
+sample = rand(3, 1000);
+slices_x = 6; slices_y = 6; slices_z = 6; name="cloud";
+figure(); plot3d_cloud( sample, slices_x, slices_y, slices_z,  name);
+
+
+
+
+LBstr = JOptionPane.showInputDialog(null, "Lower bound for Morlet", "-4");
+LB = Double.parseDouble(LBstr);
+
+UBstr = JOptionPane.showInputDialog(null, "Upper bound for Morlet", "4");
+UB = Double.parseDouble(UBstr);
+
+Nstr = JOptionPane.showInputDialog(null, "Number of points to evaluate the Morlet Wavelet", "1000");
+N = Integer.parseInt(Nstr);
+
+out = JSci.maths.wavelet.morlet.Morlet.eval( LB, UB, N);
+figure(1); plot(out[0], out[1], "Morlet Wavelet evaluated from "+LB+"  up to "+UB+" with a regular grid of "+N+" points"); 
+
+
+
+closeAll();  // closes any open figures
+t = inc(-30, 0.01, 30);
+N = (int) pow(2, 12);
+
+
+x = 5*sin(0.3*t);
+x2 = x[1..N];   // take signal as a Matrix
+
+x2 = x2+rand(1, N);  // add random noisy
+xv =  x2.getArray()[0];
+
+xvVals = new double[N];
+for (k in 0..N-1) xvVals[k]=xv[k];    // perform a copy since the transform will be in place
+
+JSci.maths.wavelet.daubechies2.FastDaubechies2.transform(xvVals, N);
+
+figure(1);       subplot(2,1,1); plot(xv, "Original Signal");
+                       subplot(2,1,2); plot(xvVals, "Daubechies2 Wavelet Transformed - First Stage"); 
+
+
+xvVals2 = new double[N];
+for (k in 0..N-1) xvVals2[k]=xv[k];    // perform a copy since the transform will be in place
+
+myDaub2 =  new JSci.maths.wavelet.daubechies2.FastDaubechies2();
+
+myDaub2.transform(xvVals2);
+
+figure(2);       subplot(2,1,1); plot(xv, "Original Signal");
+                       subplot(2,1,2); plot(xvVals2, "Daubechies2 Wavelet Transformed"); 
+
+
+cd("..")
+
+dir()
+
+cd("jLabSrc")
+
+dir()
+
+cd("wavelets")
+
+dir()
+
+load("matlab.mat")
+
+whos()
+

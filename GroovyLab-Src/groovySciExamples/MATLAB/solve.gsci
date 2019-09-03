@@ -1,0 +1,22 @@
+
+initMatlabConnection()  // init connection to MATLAB
+
+N=600
+A = Rand(N, N)
+
+b = Rand(N,1)
+
+// solve with GroovyLab
+tic()
+x = solve(A, b)
+tmJ = toc()
+res=A*x-b
+
+
+// solve with MATLAB
+mstr = "xm = A\\b "
+tic()
+meval(mstr,  ["A", "b"], ["xm"] )
+tmm = toc()
+
+xm-x

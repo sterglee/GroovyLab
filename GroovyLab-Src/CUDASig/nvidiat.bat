@@ -1,0 +1,1 @@
+nvcc -I "C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include" -I "C:\Program Files\Java\jdk1.7.0_40\include" -I "C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Include" -I "C:\Program Files\Java\jdk1.7.0_40\include\win32" -I "D:\CUDA Samples\v5.5\common\inc" -L "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\lib\x64"  -Xcompiler  -LD dwtHaar1D.cu 

@@ -1,0 +1,22 @@
+
+// specify the IP of the ScalaLab computation server
+specifyServerIP("195.130.94.125")   
+
+initServer()   // this call is required to start the computation server at the server side
+  // initialize the client subsystem
+initLocalHostClient()
+
+// perform now a remote SVD then a local and compare times
+N = 1000
+
+x = Rand(N,N)
+
+tic()
+svdx = netSVD(x)
+svdxresults = svdx.get()  // get the results from the future
+tmnet = toc()
+
+
+tic()
+lsvd = svd(x)
+tmlocal = toc() 

@@ -1,0 +1,28 @@
+f,for (
+w,while (
+i,if (
+e,else
+p,plot(
+fi,figure(
+su,subplot(
+li,linspace(
+lo,logspace(
+ra,rand(
+ma,Matrix
+pu,public 
+pr,private 
+st,static 
+cl,class
+str,String
+bo,boolean 
+fl,float
+ch,char 
+ex,extends
+Ex,Exception 
+re,return
+iof,instanceof
+th,throw
+thn,throw new
+ths,throws 
+pr,println
+

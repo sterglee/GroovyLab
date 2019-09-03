@@ -1,0 +1,25 @@
+n=2000
+
+x= Mat1D.fill1d(n,n, 1.0)
+
+
+tic()
+xx = x*x
+tm1d=toc()
+
+
+
+y=ones(n,n)
+
+tic()
+yy=y*y
+tm=toc()
+
+
+f = Mat1D.rand(n,n)
+ff=f+f
+
+fff=f*f
+ 
+
+

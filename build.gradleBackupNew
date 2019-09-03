@@ -1,0 +1,102 @@
+apply plugin: 'java'
+sourceCompatibility = 1.9
+targetCompatibility = 1.9
+
+apply plugin: 'groovy'
+
+compileJava.options.encoding='UTF-8'
+
+buildscript {
+    ext {
+        dl4j_version = "1.0.0-beta4"
+        
+    }
+    repositories {
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+        mavenCentral()
+    }
+    
+}
+apply plugin: "application"
+
+repositories {
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.deeplearning4j:deeplearning4j-core:${dl4j_version}"
+    compile "org.nd4j:nd4j-native-platform:${dl4j_version}"
+    compile "org.slf4j:slf4j-simple:1.7.25"
+    compile "org.slf4j:slf4j-api:1.7.25"
+    compile fileTree(dir: "lib", include: "*.jar")
+    compile fileTree(dir: "build/classes/java/main", include: "*.class")
+    compile fileTree(dir: "GroovyLab-Src", include: "*.class")
+  
+}
+
+
+sourceSets {
+    main {
+       
+        java {
+             
+            Set<File> classpathFiles =  fileTree (dir : "lib", include: "*.jar").getFiles()+new File("GroovyLab-Src")
+            compileClasspath =  files(classpathFiles)
+            
+            srcDir "GroovyLab-Src"
+    }
+   }
+}
+
+jar {
+    baseName="GroovyLab"
+    includeEmptyDirs = false
+    mainClassName="gExec.gLab.gLab"
+    
+     
+           
+
+           
+           def classpathfiles = fileTree (dir : "lib", include: "*.jar").getFiles().name
+           def appendedLib = classpathfiles.collect { item -> "lib/"+item}.join(' ')
+           
+    manifest {
+        attributes('Class-Path': appendedLib,
+'Main-Class':'gExec.gLab.gLab')
+    }
+
+def extensions = [ 'class', 'gsci',  'gif', 'groovy', 'htm', 'html', 'jpg', 'plots-gsci',  'png', 'properties',  'txt', 'weka-gsci', 'javaSGT', 'wav-gsci'] 
+
+   
+   from(sourceSets.main.java.srcDirs) {
+      extensions.each({extension -> include "**/*.${extension}"})
+   }
+
+    
+ }
+
+
+task fatJar(type: Jar) {
+
+    baseName="GroovyLab"
+    includeEmptyDirs = false
+    mainClassName="gExec.gLab.gLab"
+    zip64=true
+
+    manifest {
+      attributes(  
+'Main-Class':'gExec.gLab.gLab')
+    }
+  
+  
+   
+    classifier = 'all'
+    
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } 
+    }
+
+   
+    with jar
+   
+}

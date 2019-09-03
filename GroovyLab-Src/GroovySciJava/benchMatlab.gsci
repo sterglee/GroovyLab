@@ -1,0 +1,103 @@
+
+
+ tic(); sm = 0;
+N=100;
+M=100;
+K=50;
+for (k in 1..N) {
+ for (m in 1..M) {
+  for (r in 1..K) {
+   sm += sin(k*m)/sin(r);
+   sm = sin(sm-cos(k*m));
+   }
+ }
+}
+tm = toc();
+// 0.46 sec
+
+/* Matlab
+
+tic();
+sm = 0;
+N=100;
+M=100;
+K=50;
+for k = 1:N,
+ for m = 1:M,
+  for r = 1:K, 
+   sm = sm+ sin(k*m)/sin(r);
+   sm = sin(sm-cos(k*m));
+  end;
+ end;
+end;
+tm = toc();
+//  1.3sec 
+*/
+
+
+tic();
+sm = 0;
+N=10;
+M=100;
+K=50;
+for (k in 1..N) {
+ for (m in 1..M) {
+  for (r in 1..K) {
+   sm += k*m/r;
+   if (sm > 1.0f) sm = 1.0f/sm;
+   }
+ }
+}
+tm = toc();
+// 0.5sec
+
+
+/* Matlab
+tic();
+sm = 0;
+N=100;
+M=100;
+K=50;
+for k = 1:N,
+ for m = 1:M,
+  for r = 1:K, 
+   sm = sm+ k*m/r;
+   if sm > 1,  sm = 1/sm; end;
+  end;
+ end;
+end;
+tm = toc();
+// 0.8 sec
+
+
+// Scala
+tic();
+var sm = 0
+var N=100
+var M=100
+var K=50
+for (k<-1 to N) 
+ for (m<-1 to M)
+  for (r<-1 to K) { 
+   sm = sm+ k*m/r
+   if (sm > 1)
+      sm = 1/sm; 
+}
+var tm = toc();
+// 2.11 sec
+
+
+
+*/
+tic()
+k=0
+N=2000000
+sm=0.0f
+while (k<N) {
+   sm += cos(0.12*k)
+   sm -= 1.12*sm
+   sm /= 1.002
+   k++
+}
+ tm = toc()
+println(" completed loop at time = "+tm+" result = "+sm)

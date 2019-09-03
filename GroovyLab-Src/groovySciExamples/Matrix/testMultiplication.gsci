@@ -1,0 +1,36 @@
+
+
+// the size of matrices
+N = 2000; M = 1400; K = 2200
+
+x = ones(N,M); y = ones(M, K)
+// test CUDA multiplication, single precision with CUBLAS
+tic()
+xxfCUBLAS = x.fmul( y)
+tmfCUBLAS = toc()
+
+// test CUDA multiplication, double precision with CUBLAS
+tic()
+xxdCUBLAS = x.dmul( y)
+tmdCUBLAS = toc()
+
+// test fast CUDA multiplication, single precision 
+tic()
+xxCUDAf = x.fmmul( y)
+tmmf = toc()
+
+// test fast CUDA multiplication, double precision 
+tic()
+xxCUDAd = x.dmmul( y)
+tmmd = toc()
+
+
+// test native C multiplication implementation
+tic()
+xxC =  cc( x.d, y.d)
+tmC = toc()
+
+// test Java multithreaded multiplication
+tic()
+xxJ = x * y
+tmJ = toc()

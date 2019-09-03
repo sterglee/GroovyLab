@@ -1,0 +1,29 @@
+
+// to run this demo copy and paste the code 
+
+t=inc(-10, 0.01, 20);  // create a time axis
+freq = 2; 
+x=sin(freq*t);  // a simple sinusoid
+y = 70* cos(0.4*t)+12*sin(0.7*t);
+
+z = dot(y, 0.01*t);  // dot product
+h = dot(z, sin(0.3*x));  //  if the operator * cannot perform matrix multiplication it tries to perform dot product
+
+figure();  plot(t,x, "t -  sin(t)");
+
+figNew = figure();  subplot(2,1,1);  plot(t, z, "t - t*x : A sine superimposed on a linear increasing curve");
+
+subplot(2,1,2);  plot(z, h, "y .* 0.01*t, z .* sin(0.3*x)");
+
+
+figure(); hold("off"); subplot(2,1,1);  hold("on");  plot(x,y, Color.RED); plot(x,z, Color.BLUE); 
+subplot(2,1,2);   hold("off"); plot(x,y, Color.RED); plot(x,z, Color.BLUE);  
+ title("Demo for hold(\"on\"): up subplot,  hold(\"off\"), bottom subplot");
+
+
+
+sample = rand(3, 1000);
+slices_x = 6; slices_y = 6; slices_z = 6;
+nameOfPlot = "cloud"
+ plot3d_cloud( sample, slices_x, slices_y, slices_z,  nameOfPlot);
+

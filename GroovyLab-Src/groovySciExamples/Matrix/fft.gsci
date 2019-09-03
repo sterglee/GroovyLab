@@ -1,0 +1,32 @@
+close("all");
+clear("all");
+
+K = 12
+N = 2 ** K  // length of the signal
+
+t =  vlinspace(0, 10, N)   // sample uniformly axis
+f1 = 0.3; f2 = 0.9;  f3 = 20  // some frequencies
+a1 = 9;  a2 = 7; a3 = 7.8; // some amplitudes
+x = a1*sin(f1*t)+a2*sin(f2*t)+a3*cos(f3*t)
+
+y = fft(x);   // perform FFT using Apache libs
+
+r = ifft(y)  // inverse FFT
+
+fftresig = new Vec(getReParts(y))
+fftimsig= new Vec(getImParts(y))
+reconssig = new Vec(getReParts(r))
+
+figure(1); 
+title("signal and its FFT");
+subplot(3,1,1); plot(x, Color.RED, "Signal"); 
+subplot(3,1,2); plot(fftresig, Color.BLUE, "FFT");
+subplot(3,1,3); plot(reconssig, Color.BLUE, "Reconstructed with inverse FFT");
+
+
+// add make plots with JFreeChart
+jfigure(1); 
+jsubplot(3,1,1); jplot(t, x); 
+jsubplot(3,1,2); jplot(fftresig,  "FFT");
+jsubplot(3,1,3); jplot(reconssig,  "Reconstructed with inverse FFT");
+

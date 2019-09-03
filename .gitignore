@@ -1,0 +1,10 @@
+project
+target
+glab.props
+glabFavoritePaths.log
+recentsPaneFile.txt
+GroovyLabUserPaths.txt
+GroovyLabPr/build
+GroovyLabPr/dist
+build
+GroovyLabFavoritePaths.log

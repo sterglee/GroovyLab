@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 3.2  (Unix)">
+	<META NAME="CREATED" CONTENT="0;0">
+	<META NAME="CHANGED" CONTENT="20120514;14094800">
+	<STYLE TYPE="text/css">
+	<!--
+		@page { size: 8.27in 11.69in }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<P><BR><BR>
+</P>
+<P><FONT SIZE=6 STYLE="font-size: 22pt"><U><B>Description of the
+Matrix class</B></U></FONT></P>
+<P STYLE="font-weight: normal; text-decoration: none">The <B>Matrix</B>
+class implements zero-indexed two-dimensional dense matrices in
+GroovySci. That matrices are mostly based on the JAMA library. 
+</P>
+<P><BR><BR>
+</P>
+<P><FONT SIZE=4><U><B>Constructors</B></U></FONT></P>
+<P><BR><BR>
+</P>
+<P><SPAN STYLE="text-decoration: none"><B>Matrix(rows: Integer, cols:
+Integer) </B></SPAN><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-weight: normal">//
+Creates a Matrix</SPAN></SPAN><SPAN STYLE="text-decoration: none"> </SPAN><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-weight: normal">of
+size rows, cols initialized to zeros</SPAN></SPAN></P>
+<P STYLE="font-weight: normal; text-decoration: none"><A NAME="__DdeLink__3_919714430"></A>
+<I>m=new Matrix(2, 3)</I></P>
+<P><B>Construction by specifying the initial elements, e.g.</B></P>
+<P STYLE="font-weight: normal"><A NAME="__DdeLink__15_1551195728"></A>
+<I>m = new Matrix([[4.5, 5.6, -4], [ 4.5, 3, -3.4]] as double[][])</I></P>
+<P><BR><BR>
+</P>
+<P STYLE="font-weight: normal; text-decoration: none"><A NAME="DDE_LINK"></A>
+// construct a Matrix by copying the array values</P>
+<P><A NAME="DDE_LINK3"></A><SPAN STYLE="text-decoration: none"><B>Matrix(double
+[][] da ) </B></SPAN><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-weight: normal">//
+Creates a Matrix</SPAN></SPAN><SPAN STYLE="text-decoration: none">
+</SPAN><SPAN STYLE="text-decoration: none"><SPAN STYLE="font-weight: normal">initialized
+with the da array</SPAN></SPAN></P>
+<P><A NAME="__DdeLink__23_1551195728"></A><A NAME="__DdeLink__9_919714430"></A>
+<I>dd = new double[2][4]</I></P>
+<P><I>dd[1][1]=11</I></P>
+<P><I>mdd = new Matrix(dd)</I></P>
+<P><BR><BR>
+</P>
+<P><B>Construction with filling an initial value, </B>
+</P>
+<P><B>Matrix(int N, int M, double value), e.g.</B></P>
+<P STYLE="font-weight: normal"><A NAME="__DdeLink__13_919714430"></A><A NAME="__DdeLink__11_919714430"></A>
+m = new Matrix(6,8, 6.8)</P>
+<P><BR><BR>
+</P>
+<P><B>Resamples a Matrix every n rows and every m cols, </B>
+</P>
+<P><B>Matrix resample(int n, int m), e.g.</B></P>
+<P STYLE="font-weight: normal"><A NAME="__DdeLink__25_1551195728"></A><A NAME="__DdeLink__16_919714430"></A>
+m = rand(20, 30)</P>
+<P STYLE="font-weight: normal">mr = m.resample(2,3)</P>
+<P><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+<P><B>Matlab-like submatrix row and column extraction operation:
+(fromR:incR:toR, fromC:incC:toC),</B></P>
+<P><B>Matrix  [int fromR, int incR, int toR, int fromC, int incC, int
+toC], e.g.</B></P>
+<P STYLE="font-weight: normal"><A NAME="__DdeLink__27_1551195728"></A><A NAME="__DdeLink__19_919714430"></A>
+m = rand(20, 30)</P>
+<P STYLE="font-weight: normal">msubm = m[2, 2, 10, 4, 3, 10]</P>
+<P><BR><BR>
+</P>
+<P><B>Matlab-like submatrix row extraction operation:
+(fromR:incR:toR, :),</B></P>
+<P><B>Matrix[int fromR, int incR, int toR, “:”]), e.g.</B></P>
+<P>m = rand(20, 30)</P>
+<P><A NAME="__DdeLink__29_1551195728"></A>msubm = m[2, 4, 10, &quot;:&quot;]</P>
+<P><BR><BR>
+</P>
+<P><B>Matlab-like submatrix column extraction operation: (:,
+fromC:incC:toC),</B></P>
+<P><B>Matrix submc(int fromC, int incC, int toC), e.g.</B></P>
+<P STYLE="font-weight: normal"><A NAME="__DdeLink__39_919714430"></A><A NAME="__DdeLink__30_9197144301"></A><A NAME="__DdeLink__19_91971443011"></A>
+m = rand(20, 30)</P>
+<P STYLE="font-weight: normal">msubmc = m.submc(2, 2, 10)</P>
+<P><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+</BODY>
+</HTML>

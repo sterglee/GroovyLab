@@ -1,0 +1,25 @@
+
+initMatlabConnection()  // init connection to MATLAB
+
+N=1500
+x = Rand(N,N)  // a Java random 2D double array 
+
+tic()
+svdc = "[u, s, v] = svd(x);"   //  the MATLAB script for SVD computation
+
+// call MATLAB to evaluate the svd
+// the first parameter of meval(), i.e. svdc, is the MATLAB script to evaluate
+// the second parameter of meval() is  the list of input parameters from GroovyLab to MATLAB
+// the third parameter of meval() is the list of output parameters from MATLAB to GroovyLab
+meval( svdc, ["x"], ["u", "s", "v"])
+
+tmMatlab = toc()  // 1.924
+
+ shouldBeZero = u*s*t(v)-x  // from the definition of SVD
+
+
+// perform SVD with Java
+tic()
+svdJ = svd(x)
+tmJava = toc()  // 221.122 
+

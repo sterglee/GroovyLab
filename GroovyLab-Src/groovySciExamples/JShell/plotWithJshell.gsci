@@ -1,0 +1,5 @@
+
+
+// a simple plot command with JShell
+
+groovySci.math.plot.plot.plot(groovySci.math.array.Vec.vrand(9000))

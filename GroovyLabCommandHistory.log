@@ -1,0 +1,10 @@
+plot(vrand(9000))
+\
+tic(); xx = x*x; tm=toc()
+x=rand(n,n)
+n=4000
+plot(vrand(900))
+plot(vrand(900))
+plot(vrand(9000))
+n=2000
+x=rand(n.n)

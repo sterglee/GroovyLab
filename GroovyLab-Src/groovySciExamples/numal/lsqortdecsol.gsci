@@ -1,0 +1,72 @@
+
+// this script uses directly the NUMAL routines
+
+// Compute the least squares solution of the system of equations:
+  
+//     -2 * x_1 + x_2 = 0
+//     -x_1 + x_2 = 1
+//      x_1 + x_2 = 2
+//      2*x_1 + x_2 = 2
+//      x_1 + 2*x_2 = 3       
+ 
+  
+ // Procedure parameters:
+ //      void  lsqortdecsol( a, n, m, aux, diag, b)
+ 
+ //     b:   double  b[1:n];
+ //         entry:   contains the right-hand side of a linear least squares problem
+ //         exit:  b[1:m]   contains the solution to the problem
+ //                 b[m+1:n]  contains a vector with Euclidean length equal to the Euclidean length of the residual vector
+    b = new double[6];
+    x = new double[6];
+    
+ //   diag:   double diag[1:m];
+ //                exit:  the diagonal elements of the inverse of A^T * A, where A is the matrix of the linear least squares problem
+    diag = new double[3];
+ 
+ //   aux:  double aux[2:5];
+ //      entry:  aux[2]:    contains a relative tolerance used for calculating the diagonal elements of the upper triangular matrix
+ //                aux[3]:    delivers the number of the diagonal elements of the upper triangular matrix which are found not negligible, normal exit aux[3]=m
+ //                aux[5]:    the maximum of the Euclidean norms of the columns of the given matrix
+    aux = new double[6];
+ 
+ //   a:   double a[1:n, 1:m];
+ //        entry:   the coefficient matrix of the linear least squares problem;
+ //        exit:     in the upper triangle of a (the elements a[i,j] with i<j) the superdiagonal elements of the upper triangular matrix produced by the Householder transformation;
+//                   in the other part of the columns of a the significant elements of the generating vectors of the Householder matrices used for the Householder triangularization
+ a = new double[6][3];
+ c = new double[6][3];
+    
+    aux[2]=1.0e-6;
+    a[1][1]=c[1][1] = -2.0;
+    a[2][1]=c[2][1] = -1.0; 
+    a[3][1]=c[3][1]=1.0;
+    a[4][1]=c[4][1]=2.0;
+    a[5][1]=c[5][1]=1.0;
+    a[1][2]=a[2][2]=a[3][2]=a[4][2]=c[1][2]=c[2][2]=c[3][2]=c[4][2]=1.0;
+    a[5][2]=c[5][2]=2.0;
+    b[1]=x[1]=0.0;
+    b[2]=x[2]=1.0;
+    b[3]=x[3]=b[4]=x[4]=2.0;
+    b[5]=x[5]=3.0;
+ 
+ Linear_algebra.lsqortdecsol(a,5,2,aux,diag,x);
+    if (aux[3] == 2) {
+      sum=0.0;
+      for (i=1; i<=5; i++) {
+        temp=b[i]-c[i][1]*x[1]-c[i][2]*x[2];
+        sum += temp*temp;
+      }
+      DecimalFormat fiveDigit = new DecimalFormat("0.00000E0");
+      System.out.println("Aux[2, 3, 5] =  " + 
+        fiveDigit.format(aux[2]) +
+        "  " + fiveDigit.format(aux[3]) + "  " +
+        fiveDigit.format(aux[5]) +
+        "\nLSQ solution :  " + fiveDigit.format(x[1]) + "  " +
+        fiveDigit.format(x[2]) + "\nResidue (delivered) :  " +
+        fiveDigit.format(Math.sqrt(Basic.vecvec(3,5,0,x,x))) +
+        "\nResidue (checked)   :  " +
+        fiveDigit.format(Math.sqrt(sum)) +
+        "\nDiagonal of inverse M'M :  " + fiveDigit.format(diag[1]) +
+        "  " + fiveDigit.format(diag[2]));
+    }

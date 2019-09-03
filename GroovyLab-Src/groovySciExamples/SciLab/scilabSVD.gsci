@@ -1,0 +1,26 @@
+
+// perform SVD using a SciLab - GroovyLab connection 
+
+initSciLabConnection()    // init a connection wth SciLab
+
+
+x = rand(500,500)  // create a random vector
+s = "[ux, wx, vx] = svd(x); "    // string to evaluate in SciLab
+
+tic()
+scieval( s, ["x"], ["ux", "wx", "vx"])  // ["x"] is the list of input parameters from GroovyLab to SciLab
+										  //  ["ux", "wx", "vx"] is the list of result parameters from SciLab to GroovyLab
+tmsci = toc()
+
+uxd = ux.getRealPart()  
+wxd = wx.getRealPart()
+vxd = vx.getRealPart()
+
+sbz = uxd*wxd*t(vxd)-x    // should be zero
+max(max(sbz))	
+
+// test now time for Java SVD
+tic()
+svdx = svd(x)
+tmj = toc()
+	

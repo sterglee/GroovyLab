@@ -1,0 +1,56 @@
+
+N= 4000
+
+x = rand(N, N)
+
+f = { x -> if (x>0.5) -x-x-sin(x) else x*x*cos(x) }
+
+class ff implements DoubleUnaryOperator {
+	double applyAsDouble( double x) { 
+		if (x>0.5) return -x-x-sin(x);
+		 else return x*x*cos(x);
+		}
+	}
+f(0.2)
+fff = new ff()	
+// apply the function using Java 8 streams and multithreading
+tic()
+fx = x.psmap(f)
+tmps = toc()  // closure map: 0.741 sec
+
+// apply the function using Java 8 streams and multithreading
+tic()
+fxff = x.psmap(fff)
+tmpsff = toc()   // function map: 0.461
+
+tic()
+fxfff = x.ppsmap(fff)
+tmppsff = toc()
+
+// apply the function using Java8 parallel streams and multithreading
+// here parallel streams seem redundant, any CPU cores
+// are exploited already by multithreading
+tic()
+fx = x.ppsmap(f)
+tmpps = toc()
+
+// apply the function using only multithreading
+tic()
+fxj = x.pmap(f)
+tmj = toc()
+
+
+/*
+ 
+
+var N=4000
+
+var x = rand(N,N)
+
+def f(x: Double) = if (x>0.5) -x-x-sin(x) else x*x*cos(x)
+f(0.2)
+tic
+var fx = x pmap f
+var tmScalaFunction = toc  // 0.275 sec
+
+ */

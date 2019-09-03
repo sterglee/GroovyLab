@@ -1,0 +1,11 @@
+ Np = 20
+ x = linspace(0, 15, Np)
+ Ns = 30
+ y   = sin(x)
+
+
+
+figure(1); subplot(2,1,1); plot(x, y)
+subplot(2,1,2); splinePlot(x.getv(), y.getv(), Ns, Color.DARK_GRAY, "Spline Plot");
+
+

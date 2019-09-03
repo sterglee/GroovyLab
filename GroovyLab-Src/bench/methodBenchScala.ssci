@@ -1,0 +1,22 @@
+
+def  comp( N: Int) =  {
+    var sm = 0.0
+    
+    for (n<-0 to N) {
+        var  k=0;
+        while (k < 10000) {
+    sm += (k*n*0.787)
+    if (sm > 0)  sm = 1/sm;
+    else sm = 1/(-sm-1)
+      k += 1
+        }
+    }
+     sm
+}
+
+tic()
+var sm = comp(1000)
+var tmTyped = toc()
+println("sm = "+sm+ " time = "+tmTyped)
+
+// 0.218

@@ -1,0 +1,27 @@
+
+
+import org.apache.commons.math.distribution.*
+
+ gr=1.0f;  bl=0.0f
+ Ntrials = 200    // number of trials
+ p = 0.01f  // probability of success
+hold("on")
+
+N = Ntrials
+binomialAxis = new double [N]
+binomialValues = new double[N]
+
+while (p<1.0f) {
+bn = new BinomialDistributionImpl(Ntrials, p)
+
+for (x in 0.. N-1)  {
+	binomialAxis[x] = x
+	binomialValues[x] = bn.probability(x)
+}
+
+gr =( p* rand()).toFloat()
+bl = (p*rand()).toFloat()
+plot(binomialAxis, binomialValues, ""+p,  new Color(p.toFloat(), gr, bl))
+p += 0.1f
+}
+ 

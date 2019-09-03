@@ -1,0 +1,14 @@
+N=5000
+
+y=rand1D(N, N)    // DoubleMatrix, 1-D data representation
+
+tic()
+yy=y*y
+tm=toc()
+
+
+// conventinal 2D data represetntation of matrix
+x=rand(N, N)
+tic()
+xx=x*x
+tm2d=toc()

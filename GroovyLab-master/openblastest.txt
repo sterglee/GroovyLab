@@ -1,0 +1,6 @@
+x= new org.jblas.DoubleMatrix(2,2)
+
+x.put(1,1,1.2)
+
+y= x.mmul(x)
+

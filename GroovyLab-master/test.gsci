@@ -1,0 +1,3 @@
+n=9
+
+x= MatR1D.fill1d(n,n, 1.0d)

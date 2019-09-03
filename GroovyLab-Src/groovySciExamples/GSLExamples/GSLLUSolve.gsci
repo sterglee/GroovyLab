@@ -1,0 +1,22 @@
+
+ N = 100
+
+ A = rand(N,N)
+
+ b = new double [N]
+
+ for (k in 0..N-1) b[k] = Math.random()
+ 
+
+// solve the system with GSL LU solver
+tic()
+x = A.gsllusolve(b)
+ tmsolveGSLLU = toc()
+ x
+
+// solve the system with Java
+tic()
+x2 = solve(A, b)
+tmsolveJava = toc()
+
+max(max(abs(x2-x)))  // should be zero or a very small number

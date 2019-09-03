@@ -1,0 +1,51 @@
+
+
+class JM extends Matrix {
+	public JM(int m, int n) {
+		super(n, m)
+	}
+
+	public JM multiply(JM A) {
+		println("hh")
+		this
+	}
+}
+
+
+    /**
+     * Implementation of sgemm using JCublas
+     */
+    private static void sgemmJCublas(int n, float alpha, float [] A, float [] B, float beta, float [] C)
+    {
+        int nn = n * n
+
+        // Initialize JCublas
+        JCublas.cublasInit()
+
+        // Allocate memory on the device
+        Pointer d_A = new Pointer()
+        Pointer d_B = new Pointer()
+        Pointer d_C = new Pointer()
+        JCublas.cublasAlloc(nn, Sizeof.FLOAT, d_A)
+        JCublas.cublasAlloc(nn, Sizeof.FLOAT, d_B)
+        JCublas.cublasAlloc(nn, Sizeof.FLOAT, d_C)
+
+        // Copy the memory from the host to the device
+        JCublas.cublasSetVector(nn, Sizeof.FLOAT, Pointer.to(A), 1, d_A, 1)
+        JCublas.cublasSetVector(nn, Sizeof.FLOAT, Pointer.to(B), 1, d_B, 1)
+        JCublas.cublasSetVector(nn, Sizeof.FLOAT, Pointer.to(C), 1, d_C, 1)
+
+        // Execute sgemm
+        JCublas.cublasSgemm((char)'n', (char) 'n', n, n, n, alpha, d_A, n, d_B, n, beta, d_C, n)
+
+        // Copy the result from the device to the host
+        JCublas.cublasGetVector(nn, Sizeof.FLOAT, d_C, 1, Pointer.to(C), 1)
+
+        // Clean up
+        JCublas.cublasFree(d_A)
+        JCublas.cublasFree(d_B)
+        JCublas.cublasFree(d_C)
+
+        JCublas.cublasShutdown()
+    }
+mm = new JM(5, 7)

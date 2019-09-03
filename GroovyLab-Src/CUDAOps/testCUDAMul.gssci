@@ -1,0 +1,17 @@
+
+// test the CUDA multiplication 
+
+ARows = 500;  ACols = 502;   BRows = ACols;
+BCols = 501;   CRows = ARows;  CCols = BCols;
+
+
+ A = ones(ARows, ACols)
+ B = ones(BRows, BCols)
+
+tic()
+C = A*B
+tmGroovy = toc()
+
+tic()
+C = A.fmmul(B.d)
+tmCUDA = toc()

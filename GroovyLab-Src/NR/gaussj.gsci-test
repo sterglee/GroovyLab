@@ -1,0 +1,10 @@
+
+N = 10
+a = Rand(N, N)
+ ac = a.copy()
+ b = Rand(N, 1)
+bc = b.copy()
+
+NR.gaussj.gaussj(a, b)
+
+a*ac

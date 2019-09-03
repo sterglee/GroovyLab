@@ -1,0 +1,1 @@
+groovyc -cp ../../GroovyLab.jar:../../lib/matlabscilab.jar:../../lib/rsyntaxtextarea-2.5.6.jar:../../lib/autocomplete-2.5.4.jar:../../lib/JASYMCA.jar:../lib/ejml.jar:../lib/ApacheCommonMaths.jar:../lib/jblas.jar:../MTJColtSGTJCUDA.jar:.  Charts.groovy 

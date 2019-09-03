@@ -1,0 +1,33 @@
+
+close("all")
+nreps=20  // number of repetitions
+INC = 50  // matrix size increment
+
+// matrix sizes array
+sizes = new double[nreps]
+
+// arrays to keep times
+default_t = new double[nreps]
+ejml_t = new double[nreps]
+apache_t = new double[nreps]
+
+//for (rep in 0.. nreps) {
+rep=0
+     cSiz = (rep+1)* INC   // matrix will be of size:  cSiz X cSiz
+     sizes[rep] = cSiz*cSiz  // matrix size
+
+// create a positive definite matrix in order to be nonsingular (thus having inverse)
+   x = EJMLcreateSymmPosDef(cSiz, new java.util.Random(234234))
+   y = x.toDoubleArray() 
+   b = vrand(cSiz).getv()
+
+
+    tic()
+    default_x = solve(y, b)
+    ejml_t[rep] = toc()
+
+    tic()
+    ejml_x = solveEJML(y, b)
+    ejml_t[rep] = toc()
+
+    y*ejml_x-b

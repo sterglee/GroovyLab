@@ -1,0 +1,49 @@
+import java.util.Random
+import jcuda.jcufft.*
+import edu.emory.mathcs.jtransforms.fft.FloatFFT_1D
+
+//  Creates an array of the specified size, containing some random data
+     
+   float []   createRandomFloatData( int N)  
+    {
+        def  random = new Random(1)
+        float []  a = new float[N]
+        for (int  i = 0; i<N; i++)
+                a[i] =  random.nextFloat()
+                
+        return a
+    }
+
+
+// Test the 1D C2C transform with the given size.
+
+        size = 1 << 20
+        println("Creating input data...")
+        input = createRandomFloatData(size * 2)
+
+        println("Performing 1D C2C transform with JTransforms...")
+        outputJTransforms = input.clone()
+        fftj = new FloatFFT_1D(size)
+        tic()
+        fftj.complexForward(outputJTransforms)
+        tmjtransforms = toc()
+        doubleData = new double[size]
+        for (int  k = 0; k < size; k++)
+         doubleData[k] = outputJTransforms(k)
+        
+        tic()
+        xfft = fft(doubleData)
+         tmJava = toc()
+        
+        println("Performing 1D C2C transform with JCufft...")
+        outputJCufft = input.clone()
+         plan = new cufftHandle()
+        JCufft.cufftPlan1d(plan, size, cufftType.CUFFT_C2C, 1)
+        tic()
+        JCufft.cufftExecC2C(plan, outputJCufft, outputJCufft, JCufft.CUFFT_FORWARD)
+        tmfftcuda = toc()
+        
+        JCufft.cufftDestroy(plan)
+
+
+        

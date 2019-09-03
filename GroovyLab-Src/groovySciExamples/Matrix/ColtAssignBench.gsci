@@ -1,0 +1,44 @@
+
+import  cern.colt.matrix.tdouble.*
+import  cern.colt.matrix.tdouble.impl.*
+
+N=2000
+x = Rand(N,N)
+
+M = new DenseDoubleMatrix2D(x)
+
+tic()
+for (k in 0..100)
+M.assign(9)
+tm=toc()  // 0.36
+
+tic()
+for (k in 0..100)
+ for (n1 in 0..N-1)
+  for (n2 in 0..N-1)
+     x[n1][n2] = 9
+tmJ = toc()      // 14.86 , 29.7 indy
+
+
+
+/*
+var N=2000
+var x = Rand(N,N)
+
+
+tic()
+var k=0
+while  (k <=100) {
+    var n1=0
+ while  (n1<=N-1){
+     var n2 = 0
+  while  (n2 <=N-1) {
+     x(n1, n2) = 9
+     n2+=1
+     }
+     n1+=1
+     }
+     k+=1
+     }
+var tmJ = toc()      // 0.76 sec
+*/

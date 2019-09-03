@@ -1,0 +1,33 @@
+
+ km = new CUDAOps.KernelOps()
+
+
+// test matrix addition
+ N=100
+ a = new float[N*N]
+ b = new float[N*N]
+ c = new float[N*N]
+
+for (k in 0.. N-1) a[k]=k*1.0f
+for (k in 0.. N-1) b[k]=k*1.0f
+
+km.sgemm(a, N, N,  b,  N, c)
+
+km.cma(a, b, c)
+
+
+
+
+
+// test multiplication 
+ Aw = 100;  Ah = 30;  Bw = 15;  Bh = Aw
+ amg = new float[Aw*Ah]
+ bmg = new float[Ah*Bh]
+ cmg = new float[Ah*Bw]
+
+for (k in 0.. Aw*Ah-1) amg[k]=1.0f
+for (k in  0.. Ah*Bh-1) bmg[k]=1.0f
+
+tic()
+km.cmm(amg, bmg, cmg, Ah, Aw, Bw)
+tm = toc()

@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1253">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 2.2  (Win32)">
+	<META NAME="CREATED" CONTENT="0;0">
+	<META NAME="CHANGED" CONTENT="20091117;10034280">
+	<STYLE TYPE="text/css">
+	<!--
+		@page { size: 21cm 29.7cm; margin: 2.01cm }
+		P { margin-bottom: 0.2cm }
+		PRE { font-family: "Times New Roman" }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="el-GR" DIR="LTR">
+<PRE> <FONT SIZE=5><B>VD =  eig</B></FONT><FONT SIZE=5><B>(A)</B></FONT>
+
+<FONT SIZE=4 STYLE="font-size: 16pt">Computes the <I>eigenvalues</I> λ<SUB>j</SUB> and <I>eigenvectors</I> u<SUP>(j)</SUP> (j=1,...,n) of an nXn real matrix A. </FONT>
+
+<FONT SIZE=4 STYLE="font-size: 16pt">For an NXN matrix A the returned matrix <B>VD</B> is of dimension NX(N+2).</FONT>
+
+
+<FONT SIZE=4><B>VD(1:N, N+1:N+2)</B></FONT>
+  <FONT SIZE=4>the real part and the imaginary part of the calculated eigenvalues are delivered in the N+1 and N+2 columns respctively, i.e. VD(1:N, N+1) has the </FONT><FONT SIZE=4><I>real </I></FONT><FONT SIZE=4><SPAN STYLE="font-style: normal">parts and VD(1:N, N+2) the </SPAN></FONT><FONT SIZE=4><I>imaginary</I></FONT>
+
+<FONT SIZE=4><B>VD(1:N, 1:N)</B></FONT>
+  <FONT SIZE=4>the eigenvectors of the matrix; </FONT>
+<FONT SIZE=4>an eigenvector corresponding to a real eigenvalue given in array VD(1:N, N+1) </FONT><FONT SIZE=4><I> </I></FONT><FONT SIZE=4><SPAN STYLE="font-style: normal">is de livered in the corresponding column of array VD(1:N, 1:N)</SPAN></FONT><FONT SIZE=4><I>; </I></FONT><FONT SIZE=4><SPAN STYLE="font-style: normal">the real and imaginary part of an eigenvector corresponding to the first member of a nonreal conjugate pair of eigenvalues given in arrays </SPAN></FONT><FONT SIZE=4><I>re, </I></FONT><FONT SIZE=4><SPAN STYLE="font-style: normal">and </SPAN></FONT><FONT SIZE=4><I>im</I></FONT><FONT SIZE=4><SPAN STYLE="font-style: normal"> are delivered in the two consecutive columns of array VD(1:N, 1:N) corresponding to this pair</SPAN></FONT>
+<FONT SIZE=4><SPAN STYLE="font-style: normal">( the eigenvectors corresponding to the second members of nonreal complex conjugate pairs are not delivered, since they are simply the complex conjugate of those corresponding to the first member of such pairs ).</SPAN></FONT>
+
+
+    </PRE>
+</BODY>
+</HTML>

@@ -1,0 +1,4 @@
+m = new Matrix(5, 8);    // allocate matrix
+for (k in 1..5) m[k][k] = k;  // init it
+closureCodeBlock =  { x -> 2*x+9 }  // the code to apply on each matrix element
+m.eachValue (closureCodeBlock)   // apply an operation to each of its elements

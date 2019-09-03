@@ -1,0 +1,36 @@
+
+  import org.bytedeco.javacpp.gsl.*
+  import org.bytedeco.javacpp.DoublePointer
+
+ a =  [0.18, 0.60, 0.57, 0.96,
+                      0.41, 0.24, 0.99, 0.58,
+                      0.14, 0.30, 0.97, 0.66,
+                      0.51, 0.13, 0.19, 0.85 ] as double []
+                      
+  a_data = new DoublePointer(a)
+                        
+
+   b = [1.0, 2.0, 3.0, 4.0 ] as double []
+  b_data = new DoublePointer(b)
+  
+  mv  = gsl_matrix_view_array (a_data, 4, 4)
+
+   bv= gsl_vector_view_array (b_data, 4)
+
+  x = gsl_vector_alloc (4)
+  
+  p = gsl_permutation_alloc (4)
+
+  s = new int [1]
+  gsl_linalg_LU_decomp (mv.matrix(), p, s)
+  
+  gsl_linalg_LU_solve (mv.matrix(), p, bv.vector(), x)
+
+   xv = new double [4]
+  for (k in 0..3)
+     xv[k] = x.data().get(k)  
+
+  gsl_permutation_free (p);
+  gsl_vector_free (x);
+
+  xv 

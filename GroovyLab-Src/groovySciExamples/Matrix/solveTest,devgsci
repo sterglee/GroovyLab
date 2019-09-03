@@ -1,0 +1,32 @@
+
+N=3
+a = 7.8; c=-7
+A =  [ [a, -a, sin(a)], [8, -a*cos(a), a+sin(c)], [-a, tan(a), -sin(a)]] as double [][]
+Am  = new Matrix(A)
+b = [a, -a, 8.8] as double []
+bm = new Matrix(b)
+bm = t(bm)
+
+x = Am / bm
+A*x-b
+
+
+
+tic()
+nr = eig(x)
+tmnr = toc()
+
+
+tic()
+ejml = eigMTJ ( x.getArray())
+tmjml = toc()
+
+
+tic()
+ejml =eigEJML ( x)
+tmmtj = toc()
+
+
+tic()
+mtj = eig ( x.getArray())
+tmjml = toc()

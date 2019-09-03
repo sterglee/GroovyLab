@@ -1,0 +1,7 @@
+
+// display a plot with  'X' connected by a line 
+
+t= vinc(0, 0.1, 10);
+x = sin(0.23*t)+0.2252*cos(3.4*t)
+
+plotMarkedLine(t,x, Color.GREEN)

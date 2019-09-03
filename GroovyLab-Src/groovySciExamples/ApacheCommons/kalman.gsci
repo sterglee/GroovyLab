@@ -1,0 +1,99 @@
+import org.apache.commons.math3.filter.*
+
+import org.apache.commons.math3.linear.Array2DRowRealMatrix
+import org.apache.commons.math3.linear.ArrayRealVector
+import org.apache.commons.math3.linear.MatrixDimensionMismatchException
+import org.apache.commons.math3.linear.RealMatrix
+import org.apache.commons.math3.linear.RealVector
+import org.apache.commons.math3.random.JDKRandomGenerator
+import org.apache.commons.math3.random.RandomGenerator
+import org.apache.commons.math3.util.Precision
+
+        // simulates a vehicle, accelerating at a constant rate (0.1 m/s)
+
+        // discrete time interval
+        dt = 0.1d
+        // position measurement noise (meter)
+        measurementNoise = 10d
+        // acceleration noise (meter/sec^2)
+        accelNoise = 0.2d
+
+        // A = [ 1 dt ]
+        //     [ 0  1 ]
+        A = new Array2DRowRealMatrix( [ [1, dt ], [ 0, 1 ]] as double [][])
+
+        // B = [ dt^2/2 ]
+        //     [ dt     ]
+        B = new Array2DRowRealMatrix([ [Math.pow(dt, 2d) / 2d ], [ dt ]] as double [][])
+
+        // H = [ 1 0 ]
+        H = new Array2DRowRealMatrix([ [1d, 0d ]] as double [][])
+
+        // x = [ 0 0 ]
+        x = new ArrayRealVector( [0, 0] as double [])
+
+        tmp = new Array2DRowRealMatrix(  [ [ Math.pow(dt, 4d) / 4d, Math.pow(dt, 3d) / 2d ],
+                                 [ Math.pow(dt, 3d) / 2d, Math.pow(dt, 2d) ] ] as double [][])
+
+        // Q = [ dt^4/4 dt^3/2 ]
+        //     [ dt^3/2 dt^2   ]
+        Q = tmp.scalarMultiply(Math.pow(accelNoise, 2))
+
+        // P0 = [ 1 1 ]
+        //      [ 1 1 ]
+        P0 = new Array2DRowRealMatrix([ [ 1, 1 ],[ 1, 1 ]] as double [][])
+
+        // R = [ measurementNoise^2 ]
+        R = new Array2DRowRealMatrix( [  Math.pow(measurementNoise, 2) ] as double [])
+
+        // constant control input, increase velocity by 0.1 m/s per cycle
+        u = new ArrayRealVector( [ 0.1d] as double[])
+        
+        pm = new DefaultProcessModel(A, B, Q, x, P0)
+        
+        mm = new DefaultMeasurementModel(H, R)
+        
+        filter = new KalmanFilter(pm, mm)
+
+          shouldBe1 =  filter.getMeasurementDimension()    // should be 1
+       shouldBe2 = filter.getStateDimension()   //  should be 2
+
+        P0data = P0.getData() 
+        FilterErrorCovariance =  filter.getErrorCovariance()
+        P0dataEqFilterErrorCovariance = P0data-FilterErrorCovariance  // should be zero
+        
+
+        // check the initial state
+        expectedInitialState = [ 0.0, 0.0 ] as double []
+        stateEstimation = filter.getStateEstimation()
+        stateEstimationEqExpectedInitialState = stateEstimation - expectedInitialState  // should be zero
+        
+
+        randg = new JDKRandomGenerator()
+
+        tmpPNoise = new ArrayRealVector( [  Math.pow(dt, 2d) / 2d, dt ] as double [])
+
+        mNoise = new ArrayRealVector(1)
+
+        // iterate 60 steps
+        for (int i = 0; i < 60; i++) {
+            filter.predict(u)
+
+            // Simulate the process
+             pNoise = tmpPNoise.mapMultiply(accelNoise * randg.nextGaussian())
+
+            // x = A * x + B * u + pNoise
+            x = A.operate(x).add(B.operate(u)).add(pNoise)
+
+            // Simulate the measurement
+            mNoise.setEntry(0, measurementNoise * randg.nextGaussian())
+
+            // z = H * x + m_noise
+            z = H.operate(x).add(mNoise)
+
+            filter.correct(z)
+
+            // state estimate shouldn't be larger than the measurement noise
+            diff = Math.abs(x.getEntry(0) - filter.getStateEstimation()[0])
+            println("diff = "+diff)
+        }

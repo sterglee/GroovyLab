@@ -1,0 +1,30 @@
+
+
+tic()
+  sM=100
+  nthreads=1000000
+  java.util.concurrent.Future <?>[] futures = new java.util.concurrent.Future [nthreads];
+            
+  int   rowsPerThread = (int)(sM / nthreads)+1  // how many rows the thread processes
+
+  int threadId = 0;  // the current threadId
+  while (threadId < nthreads)  {  // for all threads 
+    
+    
+ futures[threadId] = edu.emory.mathcs.utils.GlobalValues.execService.submit(new Runnable() {
+    public void run()  {
+   double sm=0.0
+   for (k in 1..1000) sm+=k 
+   }
+ });
+        threadId++;
+        
+  }  // for all threads
+
+  edu.emory.mathcs.utils.ConcurrencyUtils.waitForCompletion(futures);
+
+  tm=toc()
+  
+  
+  // Linux: 7.1
+  // Win: 17.1

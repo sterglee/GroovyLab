@@ -1,0 +1,29 @@
+M = 2200
+ N = 2400
+ K = 2500
+  
+  
+  A = Ones(M*N)
+  lda = N
+  
+  B = Ones(N*K)
+  ldb = K
+  
+  C = Ones(M*K)
+  ldc = K
+  /* Compute C = A B */
+
+tic()
+  cblas_dgemm (CblasRowMajor, 
+               CblasNoTrans, CblasNoTrans, M, K, N,
+               1.0, A, lda, B, ldb, 0.0, C, ldc)
+tm=toc()   // time for CBLAS
+
+
+// compare with native GroovyLab matrix multiplication
+ Aj = Ones(M,N)
+ Bj = Ones(N, K)
+
+tic()
+Cj = Aj*Bj
+tmj = toc()

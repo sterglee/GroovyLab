@@ -1,0 +1,32 @@
+
+
+N=2000
+
+a1 = rand(N,N);  
+a2 = rand(N, N); 
+a3 = rand(N, N); 
+a4 = rand(N, N);
+
+// below we start asynchronously some matrix inverse  operations,
+// that are executed on different processor's cores in parallel
+tic()
+x1 = asynchinv(a1)
+x2 = asynchinv(a2)
+x3 = asynchinv(a3)
+x4 = asynchinv(a4)
+
+// retrieve the results of the future computations
+rx1 = x1.get() 
+rx2 = x2.get()
+rx3 = x3.get()
+rx4 = x4.get()
+
+tmasynch = toc() //  time for asynchronous matrix inverse computation
+
+// now perform  inverse with the usual blocking calls in order to compare times
+tic()
+xs1 = inv(a1)
+xs2 = inv(a2)
+xs3 = inv(a3)
+xs4 = inv(a4)
+tmsserial = toc()
