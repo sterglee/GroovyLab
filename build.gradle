@@ -27,9 +27,9 @@ repositories {
 dependencies {
     compile "org.deeplearning4j:deeplearning4j-core:${dl4j_version}"
     compile "org.nd4j:nd4j-native-platform:${dl4j_version}"
-    compile "org.apache.spark:spark-core_2.12:2.4.4"
-    compile "org.apache.spark:spark-sql_2.12:2.4.4"
-    compile "org.apache.spark:spark-mllib_2.12:2.4.4"
+  //  compile "org.apache.spark:spark-core_2.12:2.4.4"
+  //  compile "org.apache.spark:spark-sql_2.12:2.4.4"
+   // compile "org.apache.spark:spark-mllib_2.12:2.4.4"
     compile fileTree(dir: "lib", include: "*.jar")
     compile fileTree(dir: "build/classes/java/main", include: "*.class")
     compile fileTree(dir: "GroovyLab-Src", include: "*.class")
@@ -86,16 +86,18 @@ task fatJar(type: Jar) {
     zip64=true
 
     manifest {
-      attributes(  
+      attributes(
 'Main-Class':'gExec.gLab.gLab')
     }
   
   
    
-    classifier = 'all'
+  classifier = 'all'
     
+  
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } 
     }
+ 
 
    
     with jar
