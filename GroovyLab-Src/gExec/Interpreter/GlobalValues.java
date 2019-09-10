@@ -49,7 +49,7 @@ import org.scilab.modules.javasci.Scilab;
 
 public class GlobalValues
 {  
-    static public   String  dateOfBuild = " 08 Sep 2019";       // tracks the date of build    
+    static public   String  dateOfBuild = " 10 Sep 2019";       // tracks the date of build    
     
     static public JShell jshell=null;   // evaluate expressions with JShell
     static public jdk.jshell.SourceCodeAnalysis srcAnalyzer=null;
@@ -106,9 +106,9 @@ public class GlobalValues
    static public boolean methodNameSpecified = false;   // method name specified at completion
    static public boolean performPackageCompletion = false;
       
-   // at code completion (with F4) static members are denoted in bold font
+   // at code completion (with F12) static members are denoted in bold font
    static public Font staticsFont = new Font("Arial", Font.BOLD, 11);
-   // at code completion (with F4) instance members are denoted in plain font text
+   // at code completion (with F12) instance members are denoted in plain font text
    static public Font instancesFont = new Font("Arial", Font.PLAIN, 11);
    static public Font fontForCompletionListItem = instancesFont; // font to use for rendering the current item
    static public String staticsMarker = "#####";

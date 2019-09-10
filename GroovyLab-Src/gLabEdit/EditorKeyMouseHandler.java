@@ -308,14 +308,14 @@ public EditorKeyMouseHandler()
                          */
        
                 
-            case KeyEvent.VK_F12:
+            case KeyEvent.VK_F4:
                 gExec.gui.WatchWorkspace.displayGroovySciBinding(gExec.gLab.gLab.variablesWorkSpacePanel);
                 gExec.Interpreter.GlobalValues.gLabMainFrame.repaint();
                 
                 break;
                 
             
-             case KeyEvent.VK_F4:
+             case KeyEvent.VK_F12:
                   if (GlobalValues.AutoCompletionInitialized==false) {
                    GlobalAutoCompletion.initAutoCompletion();
                    gExec.Interpreter.GlobalValues.AutoCompletionGroovySci = new gExec.gui.AutoCompletionGroovySci();  // create the autocompletion object
