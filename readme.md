@@ -27,7 +27,7 @@ Of course, better is to use the Netbeans where you can load the corresponding pr
 
 
 
-## Building with Gradle and support for fat jar that supports the DeepLearning4j library and Apacche Spark
+## Building with Gradle and support for fat jar that supports the DeepLearning4j library and Apache Spark
 
 To build GroovyLab with *Gradle*, unzip the zipped file, go to the root folder where the contents are unzipped and type: 
 
