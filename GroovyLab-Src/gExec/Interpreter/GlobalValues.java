@@ -49,7 +49,7 @@ import org.scilab.modules.javasci.Scilab;
 
 public class GlobalValues
 {  
-    static public   String  dateOfBuild = " 10 Sep 2019";       // tracks the date of build    
+    static public   String  dateOfBuild = " 11 Sep 2019";       // tracks the date of build    
     
     static public JShell jshell=null;   // evaluate expressions with JShell
     static public jdk.jshell.SourceCodeAnalysis srcAnalyzer=null;
