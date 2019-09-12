@@ -1,5 +1,5 @@
 #Saved GroovyLab global conf parameters
-#Sun Sep 08 16:42:34 EEST 2019
+#Thu Sep 12 17:22:23 EEST 2019
 indyProp=false
 gLabWorkingDirProp=/home/sterg/NBProjects/GroovyLab
 GroovySciClassPathProp=.\:/\:
@@ -35,9 +35,9 @@ compileDecimalsToDoublesProp=true
 rheightProp=1736
 rwidthProp=1900
 htmlFontNameProp=Default
-ylocProp=513
+ylocProp=222
 rsyntaxInGroovyCompletionModeProp=Global
 heightProp=1736
-xlocProp=1539
+xlocProp=1930
 htmlFontSizeProp=16
 mxRowsProp=6

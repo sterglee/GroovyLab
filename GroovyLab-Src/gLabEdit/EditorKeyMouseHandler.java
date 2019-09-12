@@ -260,14 +260,14 @@ public EditorKeyMouseHandler()
    
             for (SnippetEvent snippetEvent: grResultSnippets) {
                 Snippet currentSnippet = snippetEvent.snippet();
-                
+                if (currentSnippet.kind()==Snippet.Kind.VAR)
                 System.out.println("value = "+snippetEvent.value());
             }
                      
        // GlobalValues.consoleOutputWindow.output.append(rmSuccess);
         GlobalValues.consoleOutputWindow.output.setCaretPosition(GlobalValues.consoleOutputWindow.output.getText().length());
-        
-         GlobalValues.jshell.variables().forEach(v->{{
+        /*
+         GlobalValues.jshell.variables().forEach(v->{
              String vn = v.name();
               
              VarSnippet varX = gExec.Interpreter.GlobalValues.jshell.variables().
@@ -281,8 +281,8 @@ public EditorKeyMouseHandler()
               GlobalValues.jshellBindingValues.put(vn, valueOfVar);
               GlobalValues.jshellBindingTypes.put(vn, typeOfVar);
                      }
-         }
-                     });
+         
+                     });*/
                  }
            
     System.out.flush();
