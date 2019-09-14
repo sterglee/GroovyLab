@@ -8,6 +8,7 @@ apply plugin: 'groovy'
 buildscript {
     ext {
         dl4j_version = "1.0.0-beta4"
+         spark_version = "2.4.0"
         
     }
     repositories {
@@ -25,11 +26,14 @@ repositories {
 }
 
 dependencies {
-    compile "org.deeplearning4j:deeplearning4j-core:${dl4j_version}"
-    compile "org.nd4j:nd4j-native-platform:${dl4j_version}"
-    compile "org.apache.spark:spark-core_2.12:2.4.3"
-    compile "org.apache.spark:spark-sql_2.12:2.4.3"
-    compile "org.apache.spark:spark-mllib_2.12:2.4.3"
+   // compile "org.deeplearning4j:deeplearning4j-core:${dl4j_version}"
+   // compile "org.nd4j:nd4j-native-platform:${dl4j_version}"
+    compile "org.apache.spark:spark-core_2.12:${spark_version}"
+    compile "org.apache.spark:spark-sql_2.12:${spark_version}"
+    compile "org.apache.spark:spark-mllib_2.12:${spark_version}"
+//  compile "org.apache.spark:spark-core_2.12:2.4.3"
+  //  compile "org.apache.spark:spark-sql_2.12:2.4.3"
+   // compile "org.apache.spark:spark-mllib_2.12:2.4.3"
     compile fileTree(dir: "lib", include: "*.jar")
     compile fileTree(dir: "build/classes/java/main", include: "*.class")
     compile fileTree(dir: "GroovyLab-Src", include: "*.class")
@@ -98,9 +102,9 @@ task fatJar(type: Jar) {
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } 
     }
  {
-        exclude "META-INF/*.SF"
-        exclude "META-INF/*.DSA"
-        exclude "META-INF/*.RSA"
+      //  exclude "META-INF/*.SF"
+       exclude "META-INF/*.DSA"
+     //   exclude "META-INF/*.RSA"
     }
 
    

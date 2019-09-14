@@ -1,0 +1,40 @@
+
+import org.apache.spark.api.java.JavaRDD;
+import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.sql.SparkSession;
+import org.apache.spark.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import  org.apache.spark.SparkConf;
+
+var conf=new SparkConf().setMaster("local[2]").setAppName("pi");
+
+
+var spark = SparkSession.builder()
+   . config("spark.driver.bindAddress", 7060)
+   .config("spark.master", "local[4]")
+     .config("spark.driver.host","hp")
+   .config("spark.driver.port", 36418)
+   .config("spark.submit.deployMode","client")
+.appName("JavaSparkPi").getOrCreate();
+
+var ggg=99;
+spark
+   
+    JavaSparkContext jsc = new JavaSparkContext(spark.sparkContext());
+              
+var sc = new JavaSparkContext(conf);
+sc
+
+
+ 
+
+ var filename =  "/home/sterg/test.txt";
+
+ var ffrd = sc.textFile(filename);
+ ffrd
+
+ sc
+var xx = spark.read().textFile(filename).javaRDD();
+xx 
