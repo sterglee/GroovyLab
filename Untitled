@@ -1,67 +1,22 @@
-import org.apache.spark.SparkConf;
+
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
-
-import org.nd4j.linalg.activations.Activation;
-import org.nd4j.linalg.dataset.DataSet;
-import org.nd4j.linalg.learning.config.Nadam;
-import org.nd4j.linalg.learning.config.Nesterovs;
-import org.nd4j.linalg.lossfunctions.LossFunctions;
-
-
-
-import java.io.File;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-
-
-
 import org.apache.spark.sql.SparkSession;
- spark = SparkSession.builder().appName("FruitApp").getOrCreate();  
-  
-       
- 
-  conf = new SparkConf()
 
-  
-// Set the master to local[2], you can set it to local
-// Note : For setting master, you can also use SparkSession.builder().master()
-// I preferred using config, which provides us more flexibility
-conf.setMaster("local[2]")
-// Create the session using the config above
-// getOrCreate : Gets an existing SparkSession or, if there is no existing one,
-// creates a new one based on the options set in this builder.
- session = SparkSession.builder().getOrCreate()
-System.out.println("Session created");
-// Read the input file, and create a RDD from it
-lines = session.read().text("/home/sterg/NBProjects/GroovyLab/Glab.props").javaRDD()
- // Split the lines into words
-var  words = lines.flatMap(s -> Arrays.asList(s.getString(0).split(" ")).iterator());
- // Print lines
-System.out.println(lines.count());
-// Print words
-System.out.println(words.count()); 
- 
- var conf = new SparkConf();
-// Set the master to local[2], you can set it to local
-// Note : For setting master, you can also use SparkSession.builder().master()
-// I preferred using config, which provides us more flexibility
-conf.setMaster("local[2]");
-// Create the session using the config above
-// getOrCreate : Gets an existing SparkSession or, if there is no existing one,
-// creates a new one based on the options set in this builder.
-var session = SparkSession.builder().getOrCreate();
-System.out.println("Session created");
-// Read the input file, and create a RDD from it
-var  lines = session.read().text("/home/sterg/NBProjects/GroovyLab/Glab.props").javaRDD();
- // Split the lines into words
-var  words = lines.flatMap(s -> Arrays.asList(s.getString(0).split(" ")).iterator());
- // Print lines
-System.out.println(lines.count());
-// Print words
-System.out.println(words.count()); 
+import java.util.ArrayList;
+import java.util.List;
+import  org.apache.spark.SparkConf;
 
+var conf=new SparkConf().setMaster("local[2]").setAppName("pi");
 
-conf
+var spark = SparkSession.builder()
+   . config("spark.driver.bindAddress", 7060)
+   .config("spark.master", "local[4]")
+ .config("spark.submit.deployMode","client")
+ .config("spark.sql.warehouse.dir", "/home/sterg")
+.appName("JavaSparkPi").getOrCreate();
+
+var xx = spark.read().text("/home/sterg/test.txt").javaRDD();
+xx
+
+spark.version()

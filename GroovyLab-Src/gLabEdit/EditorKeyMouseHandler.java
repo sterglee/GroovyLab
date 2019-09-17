@@ -255,7 +255,7 @@ public EditorKeyMouseHandler()
        } while (currentText.length() > 0);
        
         List<SnippetEvent> grResultSnippets = snippets.stream().map(gExec.Interpreter.GlobalValues.jshell::eval).flatMap(List::stream).collect(Collectors.toList());       
-         if (grResultSnippets != null) {
+    /*     if (grResultSnippets != null) {
             String rmSuccess = grResultSnippets.toString().replace("Success", "");    
    
             for (SnippetEvent snippetEvent: grResultSnippets) {
@@ -263,10 +263,10 @@ public EditorKeyMouseHandler()
                 if (currentSnippet.kind()==Snippet.Kind.VAR)
                 System.out.println("value = "+snippetEvent.value());
             }
-                     
+      
        // GlobalValues.consoleOutputWindow.output.append(rmSuccess);
         GlobalValues.consoleOutputWindow.output.setCaretPosition(GlobalValues.consoleOutputWindow.output.getText().length());
-        /*
+        
          GlobalValues.jshell.variables().forEach(v->{
              String vn = v.name();
               
@@ -282,9 +282,9 @@ public EditorKeyMouseHandler()
               GlobalValues.jshellBindingTypes.put(vn, typeOfVar);
                      }
          
-                     });*/
+                     });
                  }
-           
+           */
     System.out.flush();
            }
 

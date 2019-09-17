@@ -28,10 +28,14 @@ repositories {
 dependencies {
     compile "org.deeplearning4j:deeplearning4j-core:${dl4j_version}"
     compile "org.nd4j:nd4j-native-platform:${dl4j_version}"
-    compile "org.apache.spark:spark-core_2.12:${spark_version}"
-    compile "org.apache.spark:spark-sql_2.12:${spark_version}"
-    compile "org.apache.spark:spark-mllib_2.12:${spark_version}"
-    compile "org.apache.spark:spark-streaming_2.12:${spark_version}"
+    compile "org.deeplearning4j:deeplearning4j-nlp:${dl4j_version}"
+    //compile "org.deeplearning4j:dl4j-spark_2.12:${dl4j_version}"
+    compile "org.deeplearning4j:deeplearning4j-nn:${dl4j_version}"
+    compile "org.deeplearning4j:deeplearning4j-modelimport:${dl4j_version}"
+   // compile "org.apache.spark:spark-core_2.12:${spark_version}"
+    //compile "org.apache.spark:spark-sql_2.12:${spark_version}"
+   // compile "org.apache.spark:spark-mllib_2.12:${spark_version}"
+  //  compile "org.apache.spark:spark-streaming_2.12:${spark_version}"
     compile fileTree(dir: "lib", include: "*.jar")
     compile fileTree(dir: "build/classes/java/main", include: "*.class")
     compile fileTree(dir: "GroovyLab-Src", include: "*.class")
