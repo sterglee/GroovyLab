@@ -37,6 +37,7 @@ dependencies {
    // compile "org.apache.spark:spark-mllib_2.12:${spark_version}"
   //  compile "org.apache.spark:spark-streaming_2.12:${spark_version}"
     compile fileTree(dir: "lib", include: "*.jar")
+    compile fileTree(dir: "libgroovy", include: "*.jar")
     compile fileTree(dir: "build/classes/java/main", include: "*.class")
     compile fileTree(dir: "GroovyLab-Src", include: "*.class")
   
@@ -48,7 +49,7 @@ sourceSets {
        
         java {
              
-            Set<File> classpathFiles =  fileTree (dir : "lib", include: "*.jar").getFiles()+new File("GroovyLab-Src")
+            Set<File> classpathFiles =  fileTree (dir : "lib", include: "*.jar").getFiles()+ fileTree (dir : "libgroovy", include: "*.jar").getFiles()+new File("GroovyLab-Src")
             compileClasspath =  files(classpathFiles)
             
             srcDir "GroovyLab-Src"
@@ -68,8 +69,11 @@ jar {
            def classpathfiles = fileTree (dir : "lib", include: "*.jar").getFiles().name
            def appendedLib = classpathfiles.collect { item -> "lib/"+item}.join(' ')
            
+           def groovyclasspathfiles = fileTree (dir : "libgroovy", include: "*.jar").getFiles().name
+           def groovyappendedLib = groovyclasspathfiles.collect { item -> "libgroovy/"+item}.join(' ')
+           
     manifest {
-        attributes('Class-Path': appendedLib,
+        attributes('Class-Path': appendedLib+groovyappendedLib,
 'Main-Class':'gExec.gLab.gLab')
     }
 

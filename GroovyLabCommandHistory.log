@@ -1,7 +1,8 @@
-plot(vrand(900))
 plot(vrand(9000))
-plot(vrand(9000))
-\
+plot(vran
+\d(9000))
+plot(vrad(9000))
+kk=8
 tic(); xx = x*x; tm=toc()
 x=rand(n,n)
 n=4000
