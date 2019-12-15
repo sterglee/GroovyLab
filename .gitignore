@@ -1,6 +1,6 @@
 project
 target
-glab.props
+Glab.props
 glabFavoritePaths.log
 recentsPaneFile.txt
 GroovyLabUserPaths.txt
