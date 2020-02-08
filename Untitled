@@ -1,22 +1,26 @@
 
-import org.apache.spark.api.java.JavaRDD;
-import org.apache.spark.api.java.JavaSparkContext;
-import org.apache.spark.sql.SparkSession;
+import org.nd4j.linalg.api.ndarray.INDArray;
+import org.nd4j.linalg.api.ops.impl.transforms.strict.Sin;
+import org.nd4j.linalg.factory.Nd4j;
+import org.nd4j.linalg.ops.transforms.Transforms;
 
-import java.util.ArrayList;
-import java.util.List;
-import  org.apache.spark.SparkConf;
+import java.util.Arrays;
 
-var conf=new SparkConf().setMaster("local[2]").setAppName("pi");
 
-var spark = SparkSession.builder()
-   . config("spark.driver.bindAddress", 7060)
-   .config("spark.master", "local[4]")
- .config("spark.submit.deployMode","client")
- .config("spark.sql.warehouse.dir", "/home/sterg")
-.appName("JavaSparkPi").getOrCreate();
 
-var xx = spark.read().text("/home/sterg/test.txt").javaRDD();
-xx
+        /*
+        ND4J defines a wide variety of operations. Here we'll see how to use some of them:
+        - Elementwise operations:   add, multiply, divide, subtract, etc
+            add, mul, div, sub,
+            INDArray.add(INDArray), INDArray.mul(INDArray), etc
+        - Matrix multiplication:    mmul
+        - Row/column vector ops:    addRowVector, mulColumnVector, etc
+        - Element-wise transforms, like tanh, scalar max operations, etc
+         */
 
-spark.version()
+        //First, let's see how in-place vs. copy operations work
+        //Consider the calls:   myArray.add(1.0)    vs  myArray.addi(1.0)
+        // i.e., "add" vs. "addi"   ->  the "i" means in-place.
+        //In practice: the in-place ops modify the original array; the others ("copy ops") make a copy
+        originalArray = Nd4j.linspace(1,15,15).reshape('c',3,5);       //As per example 3
+        originalArray

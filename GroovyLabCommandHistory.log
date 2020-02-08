@@ -1,10 +1,10 @@
-plot(vrand(99999))
-k=9
-plot(vrad(9000))
-kk=8
-tic(); xx = x*x; tm=toc()
-x=rand(n,n)
-n=4000
-plot(vrand(900))
-plot(vrand(900))
 plot(vrand(9000))
+plot(vrand(900))
+plot(vrand(900))
+n=4000
+x=rand(n,n)
+tic(); xx = x*x; tm=toc()
+kk=8
+plot(vrad(9000))
+k=9
+plot(vrand(99999))
