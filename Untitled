@@ -1,26 +1,23 @@
 
-import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.api.ops.impl.transforms.strict.Sin;
-import org.nd4j.linalg.factory.Nd4j;
-import org.nd4j.linalg.ops.transforms.Transforms;
+//@groovy.transform.CompileStatic
+double comp(int N) {
+    double sm = 0.0
+    
+    for (int n=0; n<=N; n++) {
+        int  k=0;
+        while (k < 10000) {
+    sm += (k*n*0.787)
+    if (sm > 0)  sm = 1/sm;
+    else sm = 1.0/(-sm-1.0)
+      k++
+        }
+    }
+    return sm
+}
 
-import java.util.Arrays;
+tic()
+sm = comp(1000)
+tmTyped = toc()
+println("sm = "+sm+ " time = "+tmTyped)
 
-
-
-        /*
-        ND4J defines a wide variety of operations. Here we'll see how to use some of them:
-        - Elementwise operations:   add, multiply, divide, subtract, etc
-            add, mul, div, sub,
-            INDArray.add(INDArray), INDArray.mul(INDArray), etc
-        - Matrix multiplication:    mmul
-        - Row/column vector ops:    addRowVector, mulColumnVector, etc
-        - Element-wise transforms, like tanh, scalar max operations, etc
-         */
-
-        //First, let's see how in-place vs. copy operations work
-        //Consider the calls:   myArray.add(1.0)    vs  myArray.addi(1.0)
-        // i.e., "add" vs. "addi"   ->  the "i" means in-place.
-        //In practice: the in-place ops modify the original array; the others ("copy ops") make a copy
-        originalArray = Nd4j.linspace(1,15,15).reshape('c',3,5);       //As per example 3
-        originalArray
+// 10.1 sec
