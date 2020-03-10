@@ -1,5 +1,5 @@
 
-//@groovy.transform.CompileStatic
+@groovy.transform.CompileStatic
 double comp(int N) {
     double sm = 0.0
     
@@ -8,16 +8,41 @@ double comp(int N) {
         while (k < 10000) {
     sm += (k*n*0.787)
     if (sm > 0)  sm = 1/sm;
-    else sm = 1.0/(-sm-1.0)
-      k++
+    else sm = 1.0/(-sm-1.0);
+      k++;
         }
     }
-    return sm
+    return sm;
 }
 
 tic()
-sm = comp(1000)
+sm = comp(100000)
 tmTyped = toc()
+println("sm = "+sm+ " time = "+tmTyped)
+
+// 10.1 sec
+
+
+double comp(int N) {
+    double sm = 0.0;
+    
+    for (int n=0; n<=N; n++) {
+        int  k=0;
+        while (k < 10000) {
+    sm += (k*n*0.787);
+    if (sm > 0)  sm = 1/sm;
+    else sm = 1.0/(-sm-1.0);
+      k++;
+        }
+    }
+    return sm;
+}
+
+tic();
+var sm = comp(1000);
+var tmTyped = toc();
+
+
 println("sm = "+sm+ " time = "+tmTyped)
 
 // 10.1 sec
