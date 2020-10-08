@@ -195,8 +195,8 @@ public class gLabConsole  extends Console {
           selectedText = selectedText.trim();
           if (selectedText.isEmpty()==false)  {
             Object selectedObject = gExec.Interpreter.GlobalValues.groovyBinding.getVariable(selectedText);
-            if (selectedObject != null)
-                groovy.inspect.swingui.ObjectBrowser.inspect(selectedObject);
+      //      if (selectedObject != null)
+                //            groovy.inspect.swingui.ObjectBrowser.inspect(selectedObject);
           }
         }
     });

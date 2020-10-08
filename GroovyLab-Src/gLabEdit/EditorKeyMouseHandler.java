@@ -139,8 +139,8 @@ public EditorKeyMouseHandler()
                 text = text.trim();
           if (text.isEmpty()==false)  {
             Object selectedObject = gExec.Interpreter.GlobalValues.groovyBinding.getVariable(text);
-            if (selectedObject != null)
-                groovy.inspect.swingui.ObjectBrowser.inspect(selectedObject);
+     //       if (selectedObject != null)
+//                groovy.inspect.swingui.ObjectBrowser.inspect(selectedObject);
           }
 
                 e.consume();

@@ -126,7 +126,7 @@ public class WatchWorkspace  {
                 int selRow = gExec.gLab.gLab.varsTable.getSelectedRow();
                 String  selectedVariableName = (String)gExec.gLab.gLab.varsTable.getModel().getValueAt(selRow, 0);
                 Object selectedObject = gExec.Interpreter.GlobalValues.groovyBinding.getVariable(selectedVariableName);
-                groovy.inspect.swingui.ObjectBrowser.inspect(selectedObject);
+            //    groovy.inspect.swingui.ObjectBrowser.inspect(selectedObject);
                
                  
             }
